@@ -1,15 +1,9 @@
-// This #include statement was automatically added by the Particle IDE.
-#include "SparkIntervalTimer/SparkIntervalTimer.h"
-
 #include "application.h"
-#include "HttpClient/HttpClient.h" // http client library used to make GET request to data provider
-#include "neopixel/neopixel.h" // library for the neopixel ring
-#include "HC_SR04/HC_SR04.h" // distance sensor library
+#include "HttpClient.h" // http client library used to make GET request to data provider
+#include "neopixel.h" // library for the neopixel ring
+#include "HC_SR04.h" // distance sensor library
 #include <math.h>
 
-
-IntervalTimer Timer1;
-IntervalTimer Timer2;
 
 /**
  * Pins definition
@@ -19,6 +13,7 @@ IntervalTimer Timer2;
 #define ECHO_PIN D5 // pins used by the range sensor
 #define MIC_PIN A0
 #define NEOPIXEL_PIN D2
+#define SERVO_PIN D1
 
 /**
 * Vu-meter constants and variables definition
@@ -36,7 +31,7 @@ unsigned int sample;
 byte dotCount = 0;  //Frame counter for peak dot
 byte dotHangCount = 0; //Frame counter for holding peak dot
 
-Adafruit_NeoPixel pixRing = Adafruit_NeoPixel(N_PIXELS, NEOPIXEL_PIN, PIXEL_TYPE); // Instanciate Neopixel lib
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_PIXELS, NEOPIXEL_PIN, PIXEL_TYPE); // Instanciate Neopixel lib
 
 
 /**
@@ -86,11 +81,17 @@ int g = 0;
 int b =0;
 
 /**
- * Global variables involved with the sound module
+ * Global variables involved with the soundEffect module
 */
-bool isRunning = false;
-unsigned long scheduledShutDown;
+bool soundRunning = false;
+unsigned long scheduledSoundShutDown;
 
+/**
+ * Global variables involved with the servo
+*/
+unsigned long scheduledPumpkinClose;
+bool servoInUse = false;
+Servo servo;
 
 void setup() {
     // Set up sound trigger pin
@@ -98,9 +99,12 @@ void setup() {
     digitalWrite(SOUND_PIN, LOW);
 
     // Setup neopixel ring
-    pixRing.begin();
-    pixRing.setBrightness(PIXEL_BRIGHTNESS);
-    pixRing.show(); // initialize all pixels to 'off'
+    strip.begin();
+    strip.setBrightness(PIXEL_BRIGHTNESS);
+    strip.show(); // initialize all pixels to 'off'
+
+    servo.attach(SERVO_PIN);
+    servo.write(0);
 
     Serial.begin(9600);
 }
@@ -183,18 +187,17 @@ void loop() {
     }
 
     soundWatcher();
+    servoWatcher();
 
 }
 
 void autoRoutine() {
     double distance = distanceSensor.getDistanceCM();     // get distance from sensor in cm
-    //Serial.println(distance);
     if (distance != -1 && distance < TRIGGER_DISTANCE) {
 
-        Serial.println("YES");
         triggerSound();
-        //openPumpkin();
-        //Timer1.begin(closePumpkin, 20000, hmSec);
+        openPumpkin();
+        closePumpkin(10000);
     }
 }
 
@@ -203,13 +206,13 @@ int processAction(int code) {
         case 1:
             triggerSound();
             openPumpkin();
-            Timer1.begin(closePumpkin, 20000, hmSec);
+            closePumpkin(10000);
             break;
         case 2:
             openPumpkin();
             break;
         case 3:
-            closePumpkin();
+            closePumpkin(0);
             break;
         case 4:
             triggerSound();
@@ -219,58 +222,67 @@ int processAction(int code) {
 }
 
 void triggerSound() {
-    if (!isRunning) {
+    /*if (!soundRunning) {
         digitalWrite(SOUND_PIN, HIGH);
-        scheduledShutDown = millis() + 4000;
-        isRunning=true;
+        scheduledSoundShutDown = millis() + 500;
+        soundRunning=true;
 
-    }
+    }*/
 }
 
 void soundWatcher() {
-    if (isRunning&&millis()>scheduledShutDown) {
+    if (soundRunning&&millis()>scheduledSoundShutDown) {
         digitalWrite(SOUND_PIN, LOW);
-        isRunning=false;
+        soundRunning=false;
     }
 }
 
 void openPumpkin() {
-
+  if (!servoInUse) {
+    Serial.println("open");
+    servo.write(90);
+    servoInUse = true;
+    scheduledPumpkinClose = 0;
+  }
 }
 
-void closePumpkin() {
-    Timer1.end();
+void closePumpkin(int wait) {
+  if (scheduledPumpkinClose == 0) {
+    scheduledPumpkinClose = millis() + wait;
+  }
+}
+
+void servoWatcher() {
+  if (servoInUse&&scheduledPumpkinClose!=0&&millis()>scheduledPumpkinClose) {
+    Serial.println("close");
+    servo.write(0);
+    servoInUse = false;
+    delay(2000);
+  }
 }
 
 
 void setColor(int r, int g, int b) {
     for (int i=0; i<N_PIXELS; i++) {
-        pixRing.setPixelColor(i, r, g, b);
+        strip.setPixelColor(i, r, g, b);
     }
-    pixRing.show();
+    strip.show();
 }
 
 void rainbow(unsigned long wait) {
     static unsigned long lastMillis = 0;
     static int j = 0;
-    //Serial.println("rainbow :");
-    //Serial.println(lastMillis);
-    //Serial.println(j);
 
     if (millis() - lastMillis >= wait) {
         int i = 0;
-        // for(j; j<256; j++) {
-            for(i=0; i<pixRing.numPixels(); i++) {
-                pixRing.setPixelColor(i, Wheel((i+j) & 255));
+            for(i=0; i<strip.numPixels(); i++) {
+                strip.setPixelColor(i, Wheel((i+j) & 255));
             }
             j++;
-            //Serial.println("rainbow j: ");
-            //Serial.print(j);
-            pixRing.show();
+
+            strip.show();
             lastMillis = millis();
             if (j==256) j=0;
-            // break;
-        // }
     }
 }
 
@@ -305,28 +317,28 @@ void updateVuMeter() {
   peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
 
   //Fill the strip with rainbow gradient
-  for (int i=0;i<=pixRing.numPixels()-1;i++){
-    pixRing.setPixelColor(i,Wheel(map(i,0,pixRing.numPixels()-1,30,150)));
+  for (int i=0;i<=strip.numPixels()-1;i++){
+    strip.setPixelColor(i,Wheel(map(i,0,strip.numPixels()-1,30,150)));
   }
 
 
   //Scale the input logarithmically instead of linearly
-  c = fscale(INPUT_FLOOR, INPUT_CEILING, pixRing.numPixels(), 0, peakToPeak, 2);
+  c = fscale(INPUT_FLOOR, INPUT_CEILING, strip.numPixels(), 0, peakToPeak, 2);
 
   if(c < peak) {
     peak = c;        // Keep dot on top
     dotHangCount = 0;    // make the dot hang before falling
   }
-  if (c <= pixRing.numPixels()) { // Fill partial column with off pixels
-    drawLine(pixRing.numPixels(), pixRing.numPixels()-c, pixRing.Color(0, 0, 0));
+  if (c <= strip.numPixels()) { // Fill partial column with off pixels
+    drawLine(strip.numPixels(), strip.numPixels()-c, strip.Color(0, 0, 0));
   }
 
   // Set the peak dot to match the rainbow gradient
-  y = pixRing.numPixels() - peak;
+  y = strip.numPixels() - peak;
 
-  pixRing.setPixelColor(y-1,Wheel(map(y,0,pixRing.numPixels()-1,30,150)));
+  strip.setPixelColor(y-1,Wheel(map(y,0,strip.numPixels()-1,30,150)));
 
-  pixRing.show();
+  strip.show();
 
   // Frame based peak dot animation
   if(dotHangCount > PEAK_HANG) { //Peak pause length
@@ -351,7 +363,7 @@ void drawLine(uint8_t from, uint8_t to, uint32_t c) {
     to = fromTemp;
   }
   for(int i=from; i<=to; i++){
-    pixRing.setPixelColor(i, c);
+    strip.setPixelColor(i, c);
   }
 }
 
@@ -420,14 +432,14 @@ newEnd, float inputValue, float curve){
 // The colours are a transition r - g - b - back to r.
 uint32_t Wheel(byte WheelPos) {
   if(WheelPos < 85) {
-    return pixRing.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+    return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
   }
   else if(WheelPos < 170) {
     WheelPos -= 85;
-    return pixRing.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+    return strip.Color(255 - WheelPos * 3, 0, WheelPos * 3);
   }
   else {
     WheelPos -= 170;
-    return pixRing.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+    return strip.Color(0, WheelPos * 3, 255 - WheelPos * 3);
   }
 }
