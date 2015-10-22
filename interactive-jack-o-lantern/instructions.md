@@ -7,6 +7,7 @@ A range sensor allows to trigger an action sequence if someone gets close to the
 to modulate the light according the the surrounding sound level. 
 
 #### Components list
+
 * 1x Spark core
 * 1x [16 LEDs NeoPixel ring] (http://www.adafruit.com/products/1463) 
 * 1x [2500mAh lipo battery] (http://www.adafruit.com/products/328)
@@ -22,6 +23,7 @@ to modulate the light according the the surrounding sound level.
 * 1x perfboard
 * 5x female headers
 * 1x male header(1x3)
+* 1x jst connector (depending on your charger module 
 * jumper wires
 * wires
 * soldering equipment
@@ -30,27 +32,57 @@ to modulate the light according the the surrounding sound level.
 * glue gun
 
 
+![BOM](https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/components_list.JPG "Components needed")
+
 # Walkthrough 
 ## Building the circuit 
+#### Battery set-up
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_battery_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/battery_module_00.JPG"/>
+
 #### LED ring
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/neopixel_module_00.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/neopixel_module_01.JPG"/>
 ###### Schematics
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_neopixel_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/neopixel_module_02.JPG"/>
 ###### Code
 
 #### Sound Sensor
 ###### Schematics
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_neopixel_sound_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/sound_sensor_module_00.JPG"/>
 ###### Code
 
 ####Range Finder
 ###### Schematics
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_rangeSensor_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/range_sensor_module_00.JPG"/>
 ###### Code
 
 ####Servo motor
 ###### Schematics
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_servo_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/servo_module_00.JPG"/>
 ###### Code
 
 ####Sound Effect module
+<img width="24.25%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_00.JPG"/>
+<img width="24.25%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_01.JPG"/>
+<img width="24.25%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_02.JPG"/>
+<img width="24.25%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_03.JPG"/>
+
 ###### Schematics
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_soundEffect_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_04.JPG"/>
 ###### Code
+
+#### Complete circuit
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/circuit_schematic.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_complete_circuit.png"/>
+
+![Circuit final](https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/complete_circuit_00.JPG "Final circuit")
+
 
 #### Soldering the circuit
 
@@ -66,7 +98,23 @@ to modulate the light according the the surrounding sound level.
 
 ## Final assembly
 #### Carving the pumpkin
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_00.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_01.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_02.JPG"/>
 #### The opening mechanism
+###### A hinge for the pumpkin
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_03.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_04.JPG"/>
+###### Making the lever
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_00.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_01.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_02.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_03.JPG"/>
+
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_04.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_05.JPG"/>
+
+
 #### Putting it all together 
 
 #The result

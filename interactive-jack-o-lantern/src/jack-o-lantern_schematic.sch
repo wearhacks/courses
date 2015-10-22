@@ -9527,8 +9527,8 @@ diameter 5 mm, grid 2.54 mm</description>
 <parts>
 <part name="U$1" library="Spark" deviceset="SPARK_CORE" device="CORE"/>
 <part name="FRAME1" library="microbuilder" deviceset="FRAME_A4" device=""/>
-<part name="D1" library="SparkFun-LED" deviceset="WS2812B" device=""/>
-<part name="D2" library="SparkFun-DiscreteSemi" deviceset="DIODE" device="PTH"/>
+<part name="D3" library="SparkFun-LED" deviceset="WS2812B" device=""/>
+<part name="D1" library="SparkFun-DiscreteSemi" deviceset="DIODE" device="PTH"/>
 <part name="J_ULTRASONIC_1" library="Ultrasonic Sensor HC-SR04" deviceset="HC-SR04" device=""/>
 <part name="JP1" library="SparkFun-Connectors" deviceset="M05" device="PTH"/>
 <part name="BAT1" library="SparkFun-Electromechanical" deviceset="BATTERY" device="LIPO-TABS"/>
@@ -9567,8 +9567,10 @@ trigger</text>
 <instances>
 <instance part="U$1" gate="G$1" x="78.74" y="124.46"/>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
-<instance part="D1" gate="G$1" x="208.28" y="60.96"/>
-<instance part="D2" gate="G$1" x="220.98" y="154.94" smashed="yes" rot="R180">
+<instance part="D3" gate="G$1" x="208.28" y="60.96" smashed="yes">
+<attribute name="VALUE" x="205.74" y="53.34" size="1.778" layer="96"/>
+</instance>
+<instance part="D1" gate="G$1" x="220.98" y="154.94" smashed="yes" rot="R180">
 <attribute name="NAME" x="221.234" y="158.7754" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="218.44" y="157.2514" size="1.778" layer="96" rot="R180"/>
 </instance>
@@ -9620,7 +9622,7 @@ trigger</text>
 <wire x1="129.54" y1="45.72" x2="129.54" y2="50.8" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="D1" gate="G$1" pin="VSS"/>
+<pinref part="D3" gate="G$1" pin="VSS"/>
 <pinref part="GND5" gate="1" pin="GND"/>
 <wire x1="226.06" y1="58.42" x2="233.68" y2="58.42" width="0.1524" layer="91"/>
 </segment>
@@ -9629,7 +9631,7 @@ trigger</text>
 <pinref part="GND4" gate="1" pin="GND"/>
 <wire x1="233.68" y1="154.94" x2="226.06" y2="154.94" width="0.1524" layer="91"/>
 <wire x1="226.06" y1="154.94" x2="226.06" y2="157.48" width="0.1524" layer="91"/>
-<pinref part="D2" gate="G$1" pin="A"/>
+<pinref part="D1" gate="G$1" pin="A"/>
 <wire x1="223.52" y1="154.94" x2="226.06" y2="154.94" width="0.1524" layer="91"/>
 <junction x="226.06" y="154.94"/>
 </segment>
@@ -9670,7 +9672,7 @@ trigger</text>
 <label x="104.14" y="106.68" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="D1" gate="G$1" pin="DIN"/>
+<pinref part="D3" gate="G$1" pin="DIN"/>
 <wire x1="226.06" y1="66.04" x2="236.22" y2="66.04" width="0.1524" layer="91"/>
 <label x="233.68" y="66.04" size="1.778" layer="95"/>
 </segment>
@@ -9745,14 +9747,14 @@ trigger</text>
 </segment>
 <segment>
 <pinref part="U$4" gate="G$1" pin="VBAT"/>
-<pinref part="D1" gate="G$1" pin="VDD"/>
+<pinref part="D3" gate="G$1" pin="VDD"/>
 <wire x1="195.58" y1="66.04" x2="203.2" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="JP3" gate="A" pin="2"/>
 <pinref part="U$2" gate="G$1" pin="VBAT"/>
 <wire x1="233.68" y1="152.4" x2="215.9" y2="152.4" width="0.1524" layer="91"/>
-<pinref part="D2" gate="G$1" pin="C"/>
+<pinref part="D1" gate="G$1" pin="C"/>
 <wire x1="215.9" y1="152.4" x2="213.36" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="218.44" y1="154.94" x2="215.9" y2="154.94" width="0.1524" layer="91"/>
 <wire x1="215.9" y1="154.94" x2="215.9" y2="152.4" width="0.1524" layer="91"/>
