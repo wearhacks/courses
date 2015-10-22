@@ -8,14 +8,14 @@ to modulate the light according the the surrounding sound level.
 
 #### Components list
 * 1x Spark core
-* 1x 16 LEDs NeoPixel ring 
-* 1x 2200mAh lipo battery
-* 1x lipo usb charger/booster
-* 1x servo motor
-* 1x ultrasonic range sensor 
-* 1x audio sensor breakout
+* 1x [16 LEDs NeoPixel ring] (http://www.adafruit.com/products/1463) 
+* 1x [2500mAh lipo battery] (http://www.adafruit.com/products/328)
+* 1x [lipo usb charger/booster] (https://www.adafruit.com/products/259) or [similar](https://www.sparkfun.com/products/11231)
+* 1x [HS-311 servo motor](https://www.servocity.com/html/hs-311_standard.html#.Vih94WvX2Iw)
+* 1x [HC-SR04 ultrasonic range sensor](http://www.sainsmart.com/ultrasonic-ranging-detector-mod-hc-sr04-distance-sensor.html) 
+* 1x [audio sensor breakout](http://www.adafruit.com/products/1063)
 * 3x 470ohms resistors
-* 1x npn transistor (S9013)
+* 1x S9013 npn transistor
 * 1x diode (1N4001)
 * 1x 1000uf capacitor
 * 1x breadboard
@@ -59,6 +59,10 @@ to modulate the light according the the surrounding sound level.
 #### Getting data from twitter
 #### Defining our system's states
 #### The main loop()
+
+## Connect to twitter
+### Registering a new application on twitter
+### Configuring IoTDataProvider
 
 ## Final assembly
 #### Carving the pumpkin
