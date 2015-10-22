@@ -9,6 +9,25 @@ to modulate the light according the the surrounding sound level.
 #### Components list
 * 1x Spark core
 * 1x 16 LEDs NeoPixel ring 
+* 1x 2200mAh lipo battery
+* 1x lipo usb charger/booster
+* 1x servo motor
+* 1x ultrasonic range sensor 
+* 1x audio sensor breakout
+* 3x 470ohms resistors
+* 1x npn transistor (S9013)
+* 1x diode (1N4001)
+* 1x 1000uf capacitor
+* 1x breadboard
+* 1x perfboard
+* 5x female headers
+* 1x male header(1x3)
+* jumper wires
+* wires
+* soldering equipment
+* 1x hinge
+* 2x wooden sticks 
+* glue gun
 
 
 # Walkthrough 
