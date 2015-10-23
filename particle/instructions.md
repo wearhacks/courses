@@ -35,7 +35,7 @@ is: *include "libraryName/libraryName.h"*.
 *** Particle dev
 In that case, you need to find the github repository corresponding to your library. It can be found through the online IDE: their's a small github icon next to the name of the library 
 selected in the libraries view. Download the github repository and copy the content of the **firmware** folder at the root of your sketch directory. To import the library onto your 
-sketch, use the following syntax: *include libraryName.h*. 
+sketch, use the following syntax: *include "libraryName.h"*. 
 
 ## 5. Uploading your code 
 The process is similar on both IDEs. First navigate to your list of devices and select the one to which to send the code. Next click on the **flash** button. The code
