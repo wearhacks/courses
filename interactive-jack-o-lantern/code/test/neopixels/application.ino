@@ -1,24 +1,29 @@
 #include "application.h"
+// Comment the following line if uplading from the online IDE
+// and add the libraries manually
 #include "neopixel.h"
 
+// Define neopixel ring variables
 #define NEOPIXEL_PIN D2
 #define N_PIXELS 16
 #define PIXEL_TYPE WS2812B
-#define BRIGHTNESS 10
+#define BRIGHTNESS 10 // available range : [0;50]
 
+// Instanciate neopixel library
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_PIXELS, NEOPIXEL_PIN, PIXEL_TYPE);
 
 void setup() {
   strip.begin();
   strip.setBrightness(BRIGHTNESS);
-  strip.show();
+  strip.show(); // initialize all pixels to 'off'
 }
 
 void loop() {
-  rainbow(20);
+  rainbow(20); // display rainbow animations
 }
 
-
+// This is a slight variation from the rainbow example from the library in that
+// it works without blocking the main loop
 void rainbow(unsigned long wait) {
     static unsigned long lastMillis = 0;
     static int j = 0;

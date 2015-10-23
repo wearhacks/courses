@@ -1,9 +1,10 @@
 #include "application.h"
+#include <math.h>
+// Comment the following line if uplading from the online IDE
+// and add the libraries manually
 #include "HttpClient.h" // http client library used to make GET request to data provider
 #include "neopixel.h" // library for the neopixel ring
 #include "HC_SR04.h" // distance sensor library
-#include <math.h>
-
 
 /**
  * Pins definition
@@ -40,7 +41,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_PIXELS, NEOPIXEL_PIN, PIXEL_TYPE);
 #define WAIT 30000 // delay between requests in ms
 #define HOST "digitaljunky.io"
 #define PORT 3000
-String API_KEY = "51f02abbbf241e498b8819bbb141af12";
+String API_KEY = "IOTDATAPROVIDER_APIKEY";
 String PATH = "/clients/payload?key=";
 unsigned int nextTime = 0;    // Next time to contact the server
 HttpClient http; // instanciate HttpClient lib
@@ -91,7 +92,7 @@ unsigned long scheduledSoundShutDown;
 */
 unsigned long scheduledPumpkinClose;
 bool servoInUse = false;
-Servo servo;
+Servo servo; // instanciate servo library
 
 void setup() {
     // Set up sound trigger pin
@@ -103,10 +104,10 @@ void setup() {
     strip.setBrightness(PIXEL_BRIGHTNESS);
     strip.show(); // initialize all pixels to 'off'
 
-    servo.attach(SERVO_PIN);
-    servo.write(0);
+    servo.attach(SERVO_PIN); // register servo control pin
+    servo.write(0); // initialize servo shaft at 0 degree
 
-    Serial.begin(9600);
+    // Serial.begin(9600); uncomment for debugging purposes
 }
 
 void loop() {
@@ -143,7 +144,7 @@ void loop() {
             }
         }
 
-        nextTime = millis() + WAIT;
+        nextTime = millis() + WAIT; // set next request time
     }
 
     /**
@@ -156,6 +157,7 @@ void loop() {
             autoRoutine();
             break;
         case 2:
+            // only process action if a new instruction has been received
             if (action!=last_action) {
                 last_action = processAction(action);
             }
@@ -186,18 +188,17 @@ void loop() {
             break;
     }
 
-    soundWatcher();
-    servoWatcher();
+    soundWatcher(); // check for scheduled sound effect shutdown
+    servoWatcher(); // check for scheduled servo movement
 
 }
 
 void autoRoutine() {
     double distance = distanceSensor.getDistanceCM();     // get distance from sensor in cm
     if (distance != -1 && distance < TRIGGER_DISTANCE) {
-
         triggerSound();
         openPumpkin();
-        closePumpkin(10000);
+        closePumpkin(10000); // schedule pumpkin close action for 10 seconds later
     }
 }
 
@@ -212,7 +213,7 @@ int processAction(int code) {
             openPumpkin();
             break;
         case 3:
-            closePumpkin(0);
+            closePumpkin(1);
             break;
         case 4:
             triggerSound();
@@ -222,12 +223,12 @@ int processAction(int code) {
 }
 
 void triggerSound() {
-    /*if (!soundRunning) {
+    if (!soundRunning) {
         digitalWrite(SOUND_PIN, HIGH);
-        scheduledSoundShutDown = millis() + 500;
+        scheduledSoundShutDown = millis() + 5000;
         soundRunning=true;
 
-    }*/
+    }
 }
 
 void soundWatcher() {
@@ -237,9 +238,10 @@ void soundWatcher() {
     }
 }
 
+// open pumpkin by rotating the servo shaft to a right angle
 void openPumpkin() {
   if (!servoInUse) {
-    Serial.println("open");
+    /*Serial.println("open");*/
     servo.write(90);
     servoInUse = true;
     scheduledPumpkinClose = 0;
@@ -254,10 +256,9 @@ void closePumpkin(int wait) {
 
 void servoWatcher() {
   if (servoInUse&&scheduledPumpkinClose!=0&&millis()>scheduledPumpkinClose) {
-    Serial.println("close");
+    /*Serial.println("close");*/
     servo.write(0);
     servoInUse = false;
-    delay(2000);
   }
 }
 

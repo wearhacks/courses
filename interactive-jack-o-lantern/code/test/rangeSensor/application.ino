@@ -1,4 +1,6 @@
 #include "application.h"
+// Comment the following line if uplading from the online IDE
+// and add the libraries manually
 #include "HC_SR04.h" // distance sensor library
 
 #define TRIG_PIN D4
@@ -13,15 +15,17 @@
 HC_SR04 distanceSensor = HC_SR04(TRIG_PIN, ECHO_PIN, 2, 100);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(9600); // Begin serial communications at 9600 bits/s
 }
 
 void loop() {
-  static int nextTime = 0;
+  static int nextTime = 0; // this structure is used instead of a delay() so that the main loop is never blocked
 
   if (millis()>nextTime) {
+    // get distances from sensor
     int distanceCm = distanceSensor.getDistanceCM();
     int distanceInch = distanceSensor.getDistanceInch();
+    // print distances to serial console
     Serial.println("Distance in cm: " + String(distanceCm));
     Serial.println("Distance in inches: " + String(distanceInch));
 

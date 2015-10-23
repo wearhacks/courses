@@ -1,7 +1,9 @@
+// Instanciate servo library.
+// No need to import it since it is included in Spark's default libraries
 Servo servo;
 
 void setup() {
-  servo.attach(D1);
+  servo.attach(D1); // Set pin that will control the servo
 }
 
 void loop() {

@@ -1,12 +1,15 @@
 #include "application.h"
-#include "neopixel.h"
 #include <math.h>
+// Comment the following line if uplading from the online IDE
+// and add the libraries manually
+#include "neopixel.h"
 
+// Define neopixel ring variables and sound sensor pin
 #define NEOPIXEL_PIN D2
 #define MIC_PIN A0
 #define N_PIXELS 16
 #define PIXEL_TYPE WS2812B
-#define BRIGHTNESS 10
+#define BRIGHTNESS 10 // available range : [0;50]
 
 /**
 * Vu-meter constants and variables definition
@@ -21,19 +24,18 @@ unsigned int sample;
 byte dotCount = 0;  //Frame counter for peak dot
 byte dotHangCount = 0; //Frame counter for holding peak dot
 
+// Instanciate neopixel library
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_PIXELS, NEOPIXEL_PIN, PIXEL_TYPE);
 
 void setup() {
   strip.begin();
   strip.setBrightness(BRIGHTNESS);
-  strip.show();
+  strip.show(); // initialize all pixels to 'off'
 }
 
 void loop() {
   updateVuMeter();
 }
-
-
 
 /**
  * Vue-meter related functions
