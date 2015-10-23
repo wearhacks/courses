@@ -16,23 +16,25 @@ asking you if you wish to transfer ownership. The answer is yes.
 
 ## 3. Choose your IDE
 In order to program the Spark core, two options are available. 
-*** Online IDE
+
+### Online IDE
 The online IDE is accessible at the the following address: [https://build.particle.io/](https://build.particle.io/). It allows you to program the core through your browser. It's the quickest way to get started, 
 but it doesn't allow you to use a version control system on your files which can be a big drawback depending on your project. Plus the IDE is not as complete 
 as a desktop version (no auto-completion, no custom shortcuts etc.).  
 
-*** Particle dev
-The Particle dev IDE is based on the open source project [Atom](). It is a full-blown IDE tweaked to work with the Particle's compiling and uploading system. You can download it at [this address](https://docs.particle.io/guide/tools-and-features/dev).
+### Particle dev
+The Particle dev IDE is based on the open source project [Atom](https://atom.io/). It is a full-blown IDE tweaked to work with the Particle's compiling and uploading system. You can download it at [this address](https://docs.particle.io/guide/tools-and-features/dev).
 
 ## 4. Importing libraries
 The process is slightly different depending on the IDE you chose. 
-*** Online IDE
+
+### Online IDE
 Assuming that your have a sketch open, importing a library starts by clicking on the **Libraries** link. A list of every available library will appear in the side pannel. 
 Use to search box to search for the library you want to import by providing its name (or part of it). 
 Select the library that you need and click on **add to this sketch**. The import statement will be automatically added to your sketch. The format of the import statement 
 is: *include "libraryName/libraryName.h"*.
 
-*** Particle dev
+### Particle dev
 In that case, you need to find the github repository corresponding to your library. It can be found through the online IDE: their's a small github icon next to the name of the library 
 selected in the libraries view. Download the github repository and copy the content of the **firmware** folder at the root of your sketch directory. To import the library onto your 
 sketch, use the following syntax: *include "libraryName.h"*. 

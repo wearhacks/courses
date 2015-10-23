@@ -270,13 +270,16 @@ Start by creating a new account. You'll be redirected to the clients dashboard.
 
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/IoTDataProvider_module_00.png"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/IoTDataProvider_module_01.png"/>
+
 From there, navigate to the settings page, fill in your twitter credentials and click **save changes**.
+
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/IoTDataProvider_module_02.png"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/IoTDataProvider_module_03.png"/> 
 
 Then, create a new **client**. Choose a name for your device and add 4 fields using the green **+** button. Choose the same **Api** and **Method** parameters as 
 in the illustration. You will have to choose your own **Parameters**. In each case, choose the **hashtag** that will identify the options passed to the tweets, as well
 as the twitter account that the system should be tracking. 
+
 Note that the application will monitor tweets sent **to** the account, not **from** it. 
 When you're done, hit **Create**. You will be redirected on the dashboard that now shows your newly created device. Write down the API key somewhere as we will use 
 it in the next step. 
@@ -288,7 +291,7 @@ it in the next step.
 You're all set. Here is an example of a tweet that will be correctly interpreted by the application : 
 **@IoTDH #Mode: auto, #Lights: sound**
 
-The system is case sensitive, so make sure that your hastags and keywoard respect that rule. 
+The system is case sensitive, so make sure that your hastags and keywoards respect that rule. 
 
 ## The code explained
 [Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/hack-o-lantern/code/firmware/).
