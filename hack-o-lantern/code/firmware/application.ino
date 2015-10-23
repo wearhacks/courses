@@ -39,8 +39,8 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_PIXELS, NEOPIXEL_PIN, PIXEL_TYPE);
 * HTTP Client variables
 */
 #define WAIT 30000 // delay between requests in ms
-#define HOST "digitaljunky.io"
-#define PORT 3000
+#define HOST "hack.wearhacks.com"
+#define PORT 80
 String API_KEY = "IOTDATAPROVIDER_APIKEY";
 String PATH = "/clients/payload?key=";
 unsigned int nextTime = 0;    // Next time to contact the server
