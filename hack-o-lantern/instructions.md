@@ -243,7 +243,7 @@ By creating a new application, you're telling twitter that you want to use their
 
 In return, they will deliver you credentials in order to do so. 
 
-Navigate to the following address : (http://apps.twitter.com/)[http://apps.twitter.com/]. Once there, click on **Create New App**. 
+Navigate to the following address : [http://apps.twitter.com/](http://apps.twitter.com/). Once there, click on **Create New App**. 
 You'll then be asked to provide general informations about your app. What you write in here really doesn't matter, and you can't providing an
 imaginary website address for the *Website* field. 
 
