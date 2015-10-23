@@ -197,9 +197,6 @@ quickly understand the different elements and their relations. Use it in additio
 
 ![Circuit final](https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/complete_circuit_00.JPG "Final circuit")
 
-
-#### Soldering the circuit
-
 ## Connecting to twitter
 Create a new twitter account if you don't already have one. 
 
@@ -228,7 +225,25 @@ The two later are not directly generated. Click on **create my access token** to
 <img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/twitter_module_04.png"/>
 
 ### Configuring IoTDataProvider
-Start by creating a new account. Then, create a new **client**. 
+Start by creating a new account. You'll be redirected to the clients dashboard. 
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_00.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_01.png"/>
+From there, navigate to the settings page, fill in your twitter credentials and click **save changes**.
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_02.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_03.png"/> 
+Then, create a new **client**. Choose a name for your device and add 4 fields using the green **+** button. Choose the same **Api** and **Method** parameters as 
+in the illustration. You will have to choose your own **Parameters**. In each case, choose the **hashtag** that will identify the options passed to the tweets, as well
+as the twitter account that the system should be tracking. 
+Note that the application will monitor tweets sent **to** the account, not **from** it. 
+When you're done, hit **Create**. You will be redirected on the dashboard that now shows your newly created device. Write down the API key somewhere as we will use 
+it in the next step. 
+
+<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_04.png"/>
+<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_05.png"/>
+<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_06.png"/>
+
+You're all set. Here is an example of a tweet that will be correctly interpreted by the application : 
+**@IoTDH #Mode: auto, #Lights: sound
 
 ## The code explained
 [Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/interactive-jack-o-lantern/code/firmware/).
@@ -246,23 +261,27 @@ is passing by the pumpkin. The animmation is triggered : the pumpkin opens, play
 In manual mode, the system waits for a new action code from twitter. When one is received, the corresponding action is executed. By default, the 
 automated mode is actived. 
 The system that controls the LED is independant from the latter. It means that no mater the mode chosen (manual or auto), the lights can be set to a specific animation. 
-The animations available are sound-reactive animation, rainbow animation and single color. To enable the single color mode, a color code must be provided in the options from twitter. 
-Here is the list of the codes corresponding to the different modes and actions:
+The animations available are sound-reactive animation, rainbow animation and single color. To enable the single color mode, an hexadecimal color code must be provided in the options from twitter (example: #Color: #D9000). 
+Here is the list of the keywords corresponding to the different modes and actions, as well as their coded represetation (which is what is received by the core):
 
 ######General system modes : 
-* Automated : 1
-* Manual : 2
+* Automated : auto (1)
+* Manual : manual (2)
 
 ######Actions : 
-* Complete animation (open, sound, close) : 1
-* Open pumpkin : 2
-* Close pumpkin : 3
-* Trigger sound : 4
+* Complete animation (open, sound, close) : animation (1)
+* Open pumpkin : open (2)
+* Close pumpkin : close (3)
+* Trigger sound : play (4)
 
 ###### LEDs modes : 
-* Sound reactive : 1
-* Rainbow animation : 2
-* Single color : 3
+* Sound reactive : sound (1)
+* Rainbow animation : rainbow (2)
+* Single color : color (3)
+
+A tweet doesn't need to declare every option. They can be sent individually, in which case a new option will override the last one from the same category. 
+It takes from 30 seconds to 1 minute until a new tweet is made accessible to twitter's search function, so don't be alaramed if a new instruction is not 
+being executed right away. 
 
 #### Setup() and Loop()
 The setup() function is called once when the device boots up. We use it to set up the basic state of our system : we set the pins to the right mode, start the neopixel routine and
