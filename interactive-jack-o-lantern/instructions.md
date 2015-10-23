@@ -14,7 +14,7 @@ to modulate the light according the the surrounding sound level.
 * 1x [2500mAh lipo battery] (http://www.adafruit.com/products/328)
 * 1x [lipo usb charger/booster] (https://www.adafruit.com/products/259) or [similar](https://www.sparkfun.com/products/11231)
 * 1x [HS-311 servo motor](https://www.servocity.com/html/hs-311_standard.html#.Vih94WvX2Iw)
-* 1x [HC-SR04 ultrasonic range sensor](http://www.sainsmart.com/ultrasonic-ranging-detector-mod-hc-sr04-distance-sensor.html) 
+* 1x [HC-SR04 ultrasonic range sensor](http://www.sainsmart.com/ultrasonic-ranging-detector-mod-hc-sr04-distance-sensor.html)
 * 1x [audio sensor breakout](http://www.adafruit.com/products/1063)
 * 3x 470ohms resistors
 * 1x S9013 npn transistor
@@ -36,9 +36,15 @@ to modulate the light according the the surrounding sound level.
 ![BOM](https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/components_list.JPG "Components needed")
 
 # Walkthrough 
-We will start by testing every module of the circuit individually. In each case, a schematic of the circuit is provided, along with the corresponding code. 
+The instructions explaining **how to upload the code** to your device are available [here](https://github.com/wearhacks/courses/blob/master/particle/instructions.md). 
 
-The instructions explaining **how to upload the code** to your device are available [here](). 
+Here is how we will proceed with our project : 
+
+1. Test of every module of the circuit independently in order to verify that they work correctly. Each module will hold a simple representation of the circuit, as well as the corresponding code. All the elements are then put back together in the final circuit. 
+2. Registration of a new application on twitter in order to retrieve the credentials that will allow us to query twitter services externally. 
+3. Setup of IoTDDataProvider, the service that will handle the communications between the Spark core and twitter's API. 
+4. Presentation of the different aspects of the code that we will use for the project. 
+5. Carving of the pumpkin, preparation of the lever that will allow the top to open and final assembly.
 
 ## Building the circuit 
 #### Battery set-up
@@ -64,6 +70,7 @@ Keep your circuit set-up as it is, we will use it as-is for the next steps.
 #### LED ring
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/neopixel_module_00.JPG"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/neopixel_module_01.JPG"/>
+
 These LEDs are very popular because of their low power consumption as well as their ability to be controled with just one pin. If you don't understand why this is 
 such a nice feature, have a look at **multiplexing** on google and you'll quickly see that using only 1 pin to control 16 rgb LEDs is awesome.
 
@@ -72,7 +79,9 @@ Start by soldering the wires to your ring. 4 holes are available. You only want 
 ##### Schematics
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_neopixel_module.png"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/neopixel_module_02.JPG"/>
+
 The circuit is very simple : Vin goes to the 5v power rail, GND to...you guessed it, the GND rail. And finally Data IN is connected to D2 on the spark. 
+
 This is the pin that will send the instructions to the LEDs (which color and brightness to use. It's worth to mention that every LED on the ring can 
 be controlled individually). 
 
@@ -86,12 +95,15 @@ successively appear on your LED ring. Cool isn't it ?
 
 #### Sound Sensor
 A sound sensor works by detecting differences in air pressure and converting it into an electrical signal, much like your ear does! The key element of the mechanism 
-is a piezzoelectric device. Piezzoelectric means that it converts a mechanical phenomenon (such as the vibration of the membrane caused by the difference in 
-air pressure) into electricity. 
+
+is a piezzoelectric device. Piezzoelectric means that it converts a mechanical phenomenon (such as the vibration of the membrane caused by the difference in air pressure) into electricity. 
+
 The current generated is so tiny that it needs to be amplified so that we can be fed to an microcontroller's input pin. 
+
 ##### Schematics
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_neopixel_sound_module.png"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/sound_sensor_module_00.JPG"/>
+
 The sound sensor is a 2.4->5v device, meaning that it can be fed any voltage that falls in that range. The output will be constrained by this value:
 if say 3v are fed to the device, the output range will be [0;3v]. To simplify, if the device output equals 0v then ne sound is detected. If it is 3v, 
 the maximal sound level is detected (the sensitivity can be adjusted by tweaking the potentiometer in the back, but the default value will do in our case).
@@ -107,22 +119,26 @@ We will use this value to determine the current sound level.
 The sound level is then used to light up the LED ring (the louder, the more LEDs will be turned on). 
 ##### Code
 [Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/interactive-jack-o-lantern/code/test/neopixels+sound).
+
 Upload the code. When the spark is ready, try to clap near the sound sensor or play some music around it. You should see a nice animation being displayed 
 on your LED ring. 
 
 
 ####Range Finder
 The ultrasonic range finder is a pretty nifty device. It works very much like those radars you see in submarines, or like the system bats use to direct themselves. It sends an ultrasonic wave on one side and wait for it to bounce back on a surface placed in front of the sensor. 
+
 The wave is picked up by the other side of the device on its way back. The time it took for the wave to make its round-way trip is passed through a simple formula which 
 gives the corresponding distance between the sensor and the opposing surface.  
 
 ##### Schematics
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_rangeSensor_module.png"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/range_sensor_module_00.JPG"/>
+
 Unlike the sound sensor, the range finder is a strictly 5v device. So start by connecting the Vin pin to the 5v power rail 
 (and as always, GND goes to GND. **Don't** plug it the other way around by mistake. You will burn your sensor). 
 The **Trig** pin is to be connected to D4 on the spark. This pin is used to control when a sound wave is being sent. The result will come through the 
 **Echo** pin. But wait, if the sensor outputs a 5v signal and the spark can only accept something <= 3.3v, how can we connect the two ?
+
 We have to use a **voltage divider**. It's a simple circuit composed of two resistors that will sink part of the current to the GND so that
 the output voltage is reduced. 
  
@@ -139,11 +155,15 @@ Unlike a DC motor that rotates perpetually when powered on, a servo motor works 
 ##### Schematics
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_servo_module.png"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/servo_module_00.JPG"/>
+
 Use the male header to plug the servo to the breadboard. One side of the header may be a bit short to plug-in correctly, so don't hesitate to switch 
 it for 3 jumper cables if you want. 
+
 Connect the Vin cable to the 5v power rail and the GND to the GND rail. The control line (yellow cable) connects to D1 on the spark. 
+
 Did you notice the new component ? It's a diode. We connect it in parrallel between Vin and the GND, as close as possible to the header. It is used to 
 In this configuration, it is called a **flyback diode**. Let's come back to the water analogy we used earlier. Forget the bowl and imagine a stream of water. 
+
 Sometimes when a device like a motor is being powered down (or for the servo, when the rotation has been executed), a reverse spike of voltage is being discharged
 on the power line. Back to the stream: the reverse spike is like a wave that would travel through the stream in the opposite direction (you can experience 
 this in a delta near the sea when the tide is rising). Well once again, the microcontroller wouldn't like that. So the diode will block any current stream going
@@ -163,18 +183,24 @@ After extracting the mechanism from the toy comes the fun part : figuring out ho
 the sound routine. A quick test of the PCB traces with a multimeter was enough to understand the mechanism : a pushbutton is used to trigger the sound
 sequence by closing the circuit. We don't want to mechanically push a button to trigger the sound, so we have to find a way to trigger it remotly with 
 an electrical signal. 
+
 Fortunately, a **transistor** just does that (and much more but that's not on topic today): by providing a current to the **base** (the middle pin), 
 we open the gate of the transistor, letting current flow from the **collector** (left pin) to the **emitter** (right pin). 
+
 After a few trial and errors, it appeared that the most reliable way to control the sound module with a transistor was to permanently solder the 
 connection that used to be controlled by the switch, and to let the transistor control the power line of the device. We thus take out the batteries and solder two wires to Vin and GND. 
-<img width="24.125%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_00.JPG"/>
-<img width="24.125%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_01.JPG"/>
-<img width="24.125%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_02.JPG"/>
-<img width="24.125%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_03.JPG"/>
+
+<div>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_00.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_01.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_02.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_03.JPG"/>
+</div>
 
 ##### Schematics
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/bb_soundEffect_module.png"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/soundEffect_module_04.JPG"/>
+
 What happens is that now the module will play its sound effect as long as it is being powered. We connect the red wire (Vin) to the 5v power rail
 of the breadboard. This time, the GND is not connected directly but through the transistor. The GND of the device is connected to the collector, 
 the GND of the breadboard to the emitter. The base of the transistor is connected to pin D6 through a 470ohms resistor which is used to protect the transistor
@@ -202,7 +228,9 @@ Create a new twitter account if you don't already have one.
 
 ### Registering a new application on twitter
 You then need to create a new application on twitter. Note that you will need to have registered a phone number to your account in order to do that. 
+
 By creating a new application, you're telling twitter that you want to use their services remotly and providing informations about the usage you intend to make. 
+
 In return, they will deliver you credentials in order to do so. 
 
 Navigate to the following address : (http://apps.twitter.com/)[http://apps.twitter.com/]. Once there, click on **Create New App**. 
@@ -220,17 +248,20 @@ This is where the credentials you need to write down are. You need 4 pieces of i
 * **Access Token Secret**
  
 The two later are not directly generated. Click on **create my access token** to create them. 
-<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/twitter_module_02.png"/>
-<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/twitter_module_03.png"/>
-<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/twitter_module_04.png"/>
+
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/twitter_module_02.png"/>
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/twitter_module_03.png"/>
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/twitter_module_04.png"/>
 
 ### Configuring IoTDataProvider
 Start by creating a new account. You'll be redirected to the clients dashboard. 
+
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_00.png"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_01.png"/>
 From there, navigate to the settings page, fill in your twitter credentials and click **save changes**.
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_02.png"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_03.png"/> 
+
 Then, create a new **client**. Choose a name for your device and add 4 fields using the green **+** button. Choose the same **Api** and **Method** parameters as 
 in the illustration. You will have to choose your own **Parameters**. In each case, choose the **hashtag** that will identify the options passed to the tweets, as well
 as the twitter account that the system should be tracking. 
@@ -238,12 +269,12 @@ Note that the application will monitor tweets sent **to** the account, not **fro
 When you're done, hit **Create**. You will be redirected on the dashboard that now shows your newly created device. Write down the API key somewhere as we will use 
 it in the next step. 
 
-<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_04.png"/>
-<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_05.png"/>
-<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_06.png"/>
+<img width="32.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_04.png"/>
+<img width="32.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_05.png"/>
+<img width="32.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/IoTDataProvider_module_06.png"/>
 
 You're all set. Here is an example of a tweet that will be correctly interpreted by the application : 
-**@IoTDH #Mode: auto, #Lights: sound
+**@IoTDH #Mode: auto, #Lights: sound**
 
 ## The code explained
 [Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/interactive-jack-o-lantern/code/firmware/).
@@ -258,10 +289,13 @@ Let's go through the different states of our pumpkin.
 At the highest level, the pumpkin can be either automated on manually controlled. In automatic mode, the pumpkin is keeping track of the distance
 returned by the range sensor. If it detects a shorter distance than the threshold set in the options at the beggining of the script, it means that somebody 
 is passing by the pumpkin. The animmation is triggered : the pumpkin opens, plays the sound effect for 5 seconds and closes 10 seconds later. 
+
 In manual mode, the system waits for a new action code from twitter. When one is received, the corresponding action is executed. By default, the 
 automated mode is actived. 
+
 The system that controls the LED is independant from the latter. It means that no mater the mode chosen (manual or auto), the lights can be set to a specific animation. 
 The animations available are sound-reactive animation, rainbow animation and single color. To enable the single color mode, an hexadecimal color code must be provided in the options from twitter (example: #Color: #D9000). 
+
 Here is the list of the keywords corresponding to the different modes and actions, as well as their coded represetation (which is what is received by the core):
 
 ######General system modes : 
@@ -280,14 +314,17 @@ Here is the list of the keywords corresponding to the different modes and action
 * Single color : color (3)
 
 A tweet doesn't need to declare every option. They can be sent individually, in which case a new option will override the last one from the same category. 
+
 It takes from 30 seconds to 1 minute until a new tweet is made accessible to twitter's search function, so don't be alaramed if a new instruction is not 
 being executed right away. 
 
 #### Setup() and Loop()
 The setup() function is called once when the device boots up. We use it to set up the basic state of our system : we set the pins to the right mode, start the neopixel routine and
 place the servo in the right angle. 
+
 The main loop is the portion of the code being perpetually executed (thus the name). Every 30 seconds, it sends a request to the data provider application in order
 to check if any new instructions were sent on twitter. Then, two **switch** structures execute specific routines according to the the instructions retrieved from twitter. 
+
 If no instructions can be found, the default routines are executed (the mode is set to automatic and the LEDs show the rainbow animation). 
 
 
@@ -295,33 +332,43 @@ If no instructions can be found, the default routines are executed (the mode is 
 #### Carving the pumpkin
 No instructions needed here. You're free to let your imagination run wild. One piece of advice though: make sure that the opening of the pumpkin
 is large enough to let the toy you will use come out when the pumpkin will open. 
-<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_00.JPG"/>
-<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_01.JPG"/>
-<img width="33%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_02.JPG"/>
+
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_00.JPG"/>
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_01.JPG"/>
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_02.JPG"/>
+
 This pumpkin has been spay painted with an acrylic coating in order to delay the rotting process and to be able to glue the servo motor to the bottom. 
 
 #### The opening mechanism
 ##### A hinge for the pumpkin
+
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_03.JPG"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/pumpkin_module_04.JPG"/>
+
 The head of the pumpkin needs to be able to open and close while staying attached to the body. In order to do that, we use some strong wires 
 that loop through both parts of the pumpkin. It's not perfect, but it works!
 
 ##### Making the lever
 The mechanism used to open the pumpkin is a very basic lever. The longest segment (let's call it bigS) is planted into the inside of the top part of the pumpkin. 
+
 It must be cut so that the length equals the distance from the bottom of the pumpkin to the back of the top when it is closed. 
+
 The small segment (let's call it smallS) will be attached to the servo. Its length will determine how much the pumpkin opens. 
 When the servo is in "close" position (angle 0), the lever forms a right angle and its total length = bigS. When the servo is in "open" position, 
 the lever forms a single segment of length bigS + smallS, thus pushing the top of the pumpkin outward. 
 
 Any kind of hinge will do as long as it fits the sticks you chose. If screwing it in isn't enough to attach it properly, you can use some additional hot glue. 
-<img width="24.25%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_00.JPG"/>
-<img width="24.25%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_01.JPG"/>
-<img width="24.25%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_02.JPG"/>
-<img width="24.25%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_03.JPG"/>
+
+<div>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_00.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_01.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_02.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_03.JPG"/>
+</div>
 
 Then cut the sticks at the right dimensions (it will depend on your pumpkin) and screw/glue the small segment to the servo. Make a pointy end 
 to the long segment so that it doesn't slide off the top part of the pumpkin when in place. 
+
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_04.JPG"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/interactive-jack-o-lantern/img/hinge_module_05.JPG"/>
 
