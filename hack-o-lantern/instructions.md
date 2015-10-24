@@ -402,4 +402,4 @@ As for the range sensor, you can place it wherever you like (eye, nose, mouse) a
 Congratulations, you made your own interactive pumpkin ! It was not a trivial project so you earned a good tap on the shoulder. 
 
 #The result
-[![Watch](http://img.youtube.com/vi/TSP8RyHolZ4/default.jpg)](https://youtu.be/TSP8RyHolZ4)
+[![Watch](http://img.youtube.com/vi/TSP8RyHolZ4/0.jpg)](https://youtu.be/TSP8RyHolZ4)
