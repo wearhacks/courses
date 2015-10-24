@@ -24,7 +24,7 @@ to modulate the light according the the surrounding sound level.
 * 1x perfboard
 * 5x female headers
 * 1x male header(1x3)
-* 1x jst connector (depending on your charger module 
+* 1x jst connector (depending on your charger module)
 * jumper wires
 * wires
 * soldering equipment
@@ -292,6 +292,9 @@ You're all set. Here is an example of a tweet that will be correctly interpreted
 **@IoTDH #Mode: auto, #Lights: sound**
 
 The system is case sensitive, so make sure that your hastags and keywoards respect that rule. 
+
+You can check what will be sent to the core by requesting this url in your browser : *http://hack.wearhacks.com/clients/payload?key=YOUR_API_KEY_GOES_HERE*.
+The response format is : *ModeCode, ActionCode, LedsModeCode, R, G, B)*. If no information is found on twitter for one the the codes, *-1* is returned.  
 
 ## The code explained
 [Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/hack-o-lantern/code/firmware/).
