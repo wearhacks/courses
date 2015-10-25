@@ -1,10 +1,8 @@
 # The project 
 The goal of this project is to introduce basic concepts of IoT embedded programming through a seasonal and rather amusing angle. 
 
-The idea is to make a jack-o-lantern controlled via twitter. Commands sent to a specific twitter account allow to change the color
-of the light inside the pumpkin or perform a pre-defined animation such as opening the pumpkin or playing a spooky sound effect. 
-A range sensor allows to trigger an action sequence if someone gets close to the jack-o-lantern. Finally a sound sensor can be used
-to modulate the light according the the surrounding sound level. 
+The idea is to make a jack-o-lantern controlled via twitter. Commands sent to a specific twitter account allow to change the color of the light inside the pumpkin or perform a pre-defined animation such as opening the pumpkin or playing a spooky sound effect. 
+A range sensor allows to trigger an action sequence if someone gets close to the jack-o-lantern. Finally a sound sensor can be used to modulate the light according the the surrounding sound level. 
 
 
 #### Components list
@@ -99,9 +97,7 @@ successively appear on your LED ring. Cool isn't it ?
 
 
 #### Sound Sensor
-A sound sensor works by detecting differences in air pressure and converting it into an electrical signal, much like your ear does! The key element of the mechanism 
-
-is a piezzoelectric device. Piezzoelectric means that it converts a mechanical phenomenon (such as the vibration of the membrane caused by the difference in air pressure) into electricity. 
+A sound sensor works by detecting differences in air pressure and converting it into an electrical signal, much like your ear does! The key element of the mechanism is a piezzoelectric device. Piezzoelectric means that it converts a mechanical phenomenon (such as the vibration of the membrane caused by the difference in air pressure) into electricity. 
 
 The current generated is so tiny that it needs to be amplified so that we can be fed to an microcontroller's input pin. 
 
@@ -133,8 +129,7 @@ on your LED ring.
 ####Range Finder
 The ultrasonic range finder is a pretty nifty device. It works very much like those radars you see in submarines, or like the system bats use to direct themselves. It sends an ultrasonic wave on one side and wait for it to bounce back on a surface placed in front of the sensor. 
 
-The wave is picked up by the other side of the device on its way back. The time it took for the wave to make its round-way trip is passed through a simple formula which 
-gives the corresponding distance between the sensor and the opposing surface.  
+The wave is picked up by the other side of the device on its way back. The time it took for the wave to make its round-way trip is passed through a simple formula which gives the corresponding distance between the sensor and the opposing surface.  
 
 ##### Schematics
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/bb_rangeSensor_module.png"/>
@@ -142,17 +137,14 @@ gives the corresponding distance between the sensor and the opposing surface.
 
 Unlike the sound sensor, the range finder is a strictly 5v device. So start by connecting the Vin pin to the 5v power rail 
 (and as always, GND goes to GND. **Don't** plug it the other way around by mistake. You will burn your sensor). 
-The **Trig** pin is to be connected to D4 on the spark. This pin is used to control when a sound wave is being sent. The result will come through the 
-**Echo** pin. But wait, if the sensor outputs a 5v signal and the spark can only accept something <= 3.3v, how can we connect the two ?
+The **Trig** pin is to be connected to D4 on the spark. This pin is used to control when a sound wave is being sent. The result will come through the **Echo** pin. But wait, if the sensor outputs a 5v signal and the spark can only accept something <= 3.3v, how can we connect the two ?
 
-We have to use a **voltage divider**. It's a simple circuit composed of two resistors that will sink part of the current to the GND so that
-the output voltage is reduced. 
+We have to use a **voltage divider**. It's a simple circuit composed of two resistors that will sink part of the current to the GND so that the output voltage is reduced. 
  
 ##### Code
 [Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/hack-o-lantern/code/test/rangeSensor/).
 
-This time, connect the spark core to your computer with the usb cable provided with the kit. Fire up a Serial console and set the baud rate (the number of 
-bits/s) to 9600. Put your hand in front of the range sensor and variate the distance. You should see the corresponding values being printed on your console. 
+This time, connect the spark core to your computer with the usb cable provided with the kit. Fire up a Serial console and set the baud rate (the number of bits/s) to 9600. Put your hand in front of the range sensor and variate the distance. You should see the corresponding values being printed on your console. 
 
 
 
@@ -163,12 +155,11 @@ Unlike a DC motor that rotates perpetually when powered on, a servo motor works 
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/bb_servo_module.png"/>
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/servo_module_00.JPG"/>
 
-Use the male header to plug the servo to the breadboard. One side of the header may be a bit short to plug-in correctly, so don't hesitate to switch 
-it for 3 jumper cables if you want. 
+Use the male header to plug the servo to the breadboard. One side of the header may be a bit short to plug-in correctly, so don't hesitate to switch it for 3 jumper cables if you want. 
 
 Connect the Vin cable to the 5v power rail and the GND to the GND rail. The control line (yellow cable) connects to D1 on the spark. 
 
-Did you notice the new component ? It's a diode. We connect it in parrallel between Vin and the GND, as close as possible to the header. It is used to 
+Did you notice the new component ? It's a diode. We connect it in parrallel between Vin and the GND, as close as possible to the header. 
 In this configuration, it is called a **flyback diode**. Let's come back to the water analogy we used earlier. Forget the bowl and imagine a stream of water. 
 
 Sometimes when a device like a motor is being powered down (or for the servo, when the rotation has been executed), a reverse spike of voltage is being discharged
@@ -400,7 +391,7 @@ Time to put everything inside the pumpkin and test the result !
 The servo should be glued to the bottom. If this solution doesn't work out for you, you can cut the bottom of the pumpkin and add a solid bottom in order 
 to screw the servo to it. 
 
-As for the range sensor, you can place it wherever you like (eye, nose, mouse) as long as its line of sight is not obstructed. 
+As for the range sensor, you can place it wherever you like (eye, nose, mouth) as long as its line of sight is not obstructed. 
 
 Congratulations, you made your own interactive pumpkin ! It was not a trivial project so you earned a good tap on the shoulder. 
 
