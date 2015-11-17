@@ -31,7 +31,7 @@ A range sensor allows to trigger an action sequence if someone gets close to the
 * glue gun
 
 
-![BOM](https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/components_list.JPG "Components needed")
+![BOM](https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/components_list.JPG "Components needed")
 
 # Walkthrough 
 The instructions explaining **how to upload the code** to your device are available [here](https://github.com/wearhacks/courses/blob/master/particle/instructions.md). 
@@ -47,8 +47,8 @@ Here is how we will proceed with our project :
 ## Building the circuit 
 #### Battery set-up
 
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/bb_battery_module.png"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/battery_module_00.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/bb_battery_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/battery_module_00.JPG"/>
 
 The circuit is powered by a 3.7v 2500mAh lipo battery. However, some of our components need 5v to function correctly (the servo motor, the range sensor and the LEDs). 
 This is where the battery charger/booster comes in. Addionnally to providing a way to charge the battery through a usb connection, it also transforms 
@@ -70,8 +70,8 @@ Keep your circuit set-up as it is, we will use it as-is for the next steps.
 
 
 #### LED ring
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/neopixel_module_00.JPG"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/neopixel_module_01.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/neopixel_module_00.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/neopixel_module_01.JPG"/>
 
 These LEDs are very popular because of their low power consumption as well as their ability to be controled with just one pin. If you don't understand why this is 
 such a nice feature, have a look at **multiplexing** on google and you'll quickly see that using only 1 pin to control 16 rgb LEDs is awesome.
@@ -79,8 +79,8 @@ such a nice feature, have a look at **multiplexing** on google and you'll quickl
 Start by soldering the wires to your ring. 4 holes are available. You only want to solder **Vin**, **Gnd** and **Data IN**. 
 
 ##### Schematics
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/bb_neopixel_module.png"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/neopixel_module_02.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/bb_neopixel_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/neopixel_module_02.JPG"/>
 
 The circuit is very simple : Vin goes to the 5v power rail, GND to...you guessed it, the GND rail. And finally Data IN is connected to D2 on the spark. 
 
@@ -90,9 +90,9 @@ be controlled individually).
 Once again, don't unplug your components. We will use the LED ring to test the audio sensor's output in the next step. 
 	
 ##### Code
-[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/hack-o-lantern/code/test/neopixels/).
+[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/projects/hack-o-lantern/code/test/neopixels/).
 
-Upload the code to your device using on of the two methods explained in the [Getting started with the Spark Core]() document. You should see the colors of the rainbow
+Upload the code to your device using on of the two methods explained in the [Getting started with the Spark Core](https://github.com/wearhacks/courses/blob/master/guides/particle/instructions.md) document. You should see the colors of the rainbow
 successively appear on your LED ring. Cool isn't it ?
 
 
@@ -102,8 +102,8 @@ A sound sensor works by detecting differences in air pressure and converting it 
 The current generated is so tiny that it needs to be amplified so that we can be fed to an microcontroller's input pin. 
 
 ##### Schematics
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/bb_neopixel_sound_module.png"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/sound_sensor_module_00.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/bb_neopixel_sound_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/sound_sensor_module_00.JPG"/>
 
 The sound sensor is a 2.4->5v device, meaning that it can be fed any voltage that falls in that range. The output will be constrained by this value:
 if say 3v are fed to the device, the output range will be [0;3v]. To simplify, if the device output equals 0v then ne sound is detected. If it is 3v, 
@@ -120,7 +120,7 @@ We will use this value to determine the current sound level.
 The sound level is then used to light up the LED ring (the louder, the more LEDs will be turned on). 
 
 ##### Code
-[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/hack-o-lantern/code/test/neopixels+sound).
+[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/projects/hack-o-lantern/code/test/neopixels+sound).
 
 Upload the code. When the spark is ready, try to clap near the sound sensor or play some music around it. You should see a nice animation being displayed 
 on your LED ring. 
@@ -132,8 +132,8 @@ The ultrasonic range finder is a pretty nifty device. It works very much like th
 The wave is picked up by the other side of the device on its way back. The time it took for the wave to make its round-way trip is passed through a simple formula which gives the corresponding distance between the sensor and the opposing surface.  
 
 ##### Schematics
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/bb_rangeSensor_module.png"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/range_sensor_module_00.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/bb_rangeSensor_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/range_sensor_module_00.JPG"/>
 
 Unlike the sound sensor, the range finder is a strictly 5v device. So start by connecting the Vin pin to the 5v power rail 
 (and as always, GND goes to GND. **Don't** plug it the other way around by mistake. You will burn your sensor). 
@@ -142,7 +142,7 @@ The **Trig** pin is to be connected to D4 on the spark. This pin is used to cont
 We have to use a **voltage divider**. It's a simple circuit composed of two resistors that will sink part of the current to the GND so that the output voltage is reduced. 
  
 ##### Code
-[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/hack-o-lantern/code/test/rangeSensor/).
+[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/projects/hack-o-lantern/code/test/rangeSensor/).
 
 This time, connect the spark core to your computer with the usb cable provided with the kit. Fire up a Serial console and set the baud rate (the number of bits/s) to 9600. Put your hand in front of the range sensor and variate the distance. You should see the corresponding values being printed on your console. 
 
@@ -152,8 +152,8 @@ This time, connect the spark core to your computer with the usb cable provided w
 Unlike a DC motor that rotates perpetually when powered on, a servo motor works by receiving an angle option, and rotating its shaft to the following angle. 
 
 ##### Schematics
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/bb_servo_module.png"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/servo_module_00.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/bb_servo_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/servo_module_00.JPG"/>
 
 Use the male header to plug the servo to the breadboard. One side of the header may be a bit short to plug-in correctly, so don't hesitate to switch it for 3 jumper cables if you want. 
 
@@ -168,7 +168,7 @@ this in a delta near the sea when the tide is rising). Well once again, the micr
 in the wrong direction. 
  
 ##### Code
-[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/hack-o-lantern/code/test/servo/). 
+[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/projects/hack-o-lantern/code/test/servo/). 
 
 Upload the code. The servo should start to rotate back and forth on a 180 degrees angle. 
 
@@ -190,15 +190,15 @@ After a few trial and errors, it appeared that the most reliable way to control 
 connection that used to be controlled by the switch, and to let the transistor control the power line of the device. We thus take out the batteries and solder two wires to Vin and GND. 
 
 <div>
-<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/soundEffect_module_00.JPG"/>
-<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/soundEffect_module_01.JPG"/>
-<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/soundEffect_module_02.JPG"/>
-<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/soundEffect_module_03.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/soundEffect_module_00.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/soundEffect_module_01.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/soundEffect_module_02.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/soundEffect_module_03.JPG"/>
 </div>
 
 ##### Schematics
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/bb_soundEffect_module.png"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/soundEffect_module_04.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/bb_soundEffect_module.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/soundEffect_module_04.JPG"/>
 
 What happens is that now the module will play its sound effect as long as it is being powered. We connect the red wire (Vin) to the 5v power rail
 of the breadboard. This time, the GND is not connected directly but through the transistor. The GND of the device is connected to the collector, 
@@ -209,20 +209,20 @@ If we set D6 to **LOW** (0v), the gate of the transistor is closed, no current c
 If we set D6 to **HIGH** (3.3v), the gate of the transistor opens, current can flow and the device is on, playing its sound effect. 
 
 ##### Code
-[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/hack-o-lantern/code/test/soundEffect/).
+[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/projects/hack-o-lantern/code/test/soundEffect/).
 
 Upload the code, plug in your usb cable and open the Serial console. Because the sound can get very annoying pretty quickly, the animation will only 
 start if you send **1** to the console. 
 
 
 #### Complete circuit
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/circuit_schematic.png"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/bb_complete_circuit.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/circuit_schematic.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/bb_complete_circuit.png"/>
 
 Time to put everything together. The image you see on the left is the **circuit schematic**, an abstract model of the circuit that allow a trained eye to 
 quickly understand the different elements and their relations. Use it in addition with the right image in order to make the full circuit. 
 
-![Circuit final](https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/complete_circuit_00.JPG "Final circuit")
+![Circuit final](https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/complete_circuit_00.JPG "Final circuit")
 
 ## Connecting to twitter
 Create a new twitter account if you don't already have one. 
@@ -238,8 +238,8 @@ Navigate to the following address : [http://apps.twitter.com/](http://apps.twitt
 You'll then be asked to provide general informations about your app. What you write in here really doesn't matter, and you can't providing an
 imaginary website address for the *Website* field. 
 
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/twitter_module_00.png"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/twitter_module_01.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/twitter_module_00.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/twitter_module_01.png"/>
 
 You will be redirected to your application management page. Click on the **Keys and Access Tokens** tab. 
 This is where the credentials you need to write down are. You need 4 pieces of information : 
@@ -250,22 +250,22 @@ This is where the credentials you need to write down are. You need 4 pieces of i
  
 The two later are not directly generated. Click on **create my access token** to create them. 
 
-<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/twitter_module_02.png"/>
-<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/twitter_module_03.png"/>
-<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/twitter_module_04.png"/>
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/twitter_module_02.png"/>
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/twitter_module_03.png"/>
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/twitter_module_04.png"/>
 
 ### Configuring IoTDataProvider
 Fire up a browser at the following address : [http://hack.wearhacks.com/](http://hack.wearhacks.com/).
 
 Start by creating a new account. You'll be redirected to the clients dashboard. 
 
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/IoTDataProvider_module_00.png"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/IoTDataProvider_module_01.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/IoTDataProvider_module_00.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/IoTDataProvider_module_01.png"/>
 
 From there, navigate to the settings page, fill in your twitter credentials and click **save changes**.
 
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/IoTDataProvider_module_02.png"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/IoTDataProvider_module_03.png"/> 
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/IoTDataProvider_module_02.png"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/IoTDataProvider_module_03.png"/> 
 
 Then, create a new **client**. Choose a name for your device and add 4 fields using the green **+** button. Choose the same **Api** and **Method** parameters as 
 in the illustration. You will have to choose your own **Parameters**. In each case, choose the **hashtag** that will identify the options passed to the tweets, as well
@@ -275,9 +275,9 @@ Note that the application will monitor tweets sent **to** the account, not **fro
 When you're done, hit **Create**. You will be redirected on the dashboard that now shows your newly created device. Write down the API key somewhere as we will use 
 it in the next step. 
 
-<img width="32.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/IoTDataProvider_module_04.png"/>
-<img width="32.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/IoTDataProvider_module_05.png"/>
-<img width="32.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/IoTDataProvider_module_06.png"/>
+<img width="32.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/IoTDataProvider_module_04.png"/>
+<img width="32.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/IoTDataProvider_module_05.png"/>
+<img width="32.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/IoTDataProvider_module_06.png"/>
 
 You're all set. Here is an example of a tweet that will be correctly interpreted by the application : 
 **@IoTDH #Mode: auto, #Lights: sound**
@@ -288,7 +288,7 @@ You can check what will be sent to the core by requesting this url in your brows
 The response format is : *ModeCode, ActionCode, LedsModeCode, R, G, B*. If no information is found on twitter for one the the codes, *-1* is returned.  
 
 ## The code explained
-[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/hack-o-lantern/code/firmware/).
+[Link to the sketch folder](https://github.com/wearhacks/courses/tree/master/projects/hack-o-lantern/code/firmware/).
 
 You are encouraged to read through the code. The comments will give you valuable insights on the mechanisms at play. We will nonetheless provide additional details. 
 
@@ -345,17 +345,17 @@ If no instructions can be found, the default routines are executed (the mode is 
 No instructions needed here. You're free to let your imagination run wild. One piece of advice though: make sure that the opening of the pumpkin
 is large enough to let the toy you will use come out when the pumpkin will open. 
 
-<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/pumpkin_module_00.JPG"/>
-<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/pumpkin_module_01.JPG"/>
-<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/pumpkin_module_02.JPG"/>
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/pumpkin_module_00.JPG"/>
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/pumpkin_module_01.JPG"/>
+<img width="32%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/pumpkin_module_02.JPG"/>
 
 This pumpkin has been spay painted with an acrylic coating in order to delay the rotting process and to be able to glue the servo motor to the bottom. 
 
 #### The opening mechanism
 ##### A hinge for the pumpkin
 
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/pumpkin_module_03.JPG"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/pumpkin_module_04.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/pumpkin_module_03.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/pumpkin_module_04.JPG"/>
 
 The head of the pumpkin needs to be able to open and close while staying attached to the body. In order to do that, we use some strong wires 
 that loop through both parts of the pumpkin. It's not perfect, but it works!
@@ -372,17 +372,17 @@ the lever forms a single segment of length bigS + smallS, thus pushing the top o
 Any kind of hinge will do as long as it fits the sticks you chose. If screwing it in isn't enough to attach it properly, you can use some additional hot glue. 
 
 <div>
-<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/hinge_module_00.JPG"/>
-<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/hinge_module_01.JPG"/>
-<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/hinge_module_02.JPG"/>
-<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/hinge_module_03.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/hinge_module_00.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/hinge_module_01.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/hinge_module_02.JPG"/>
+<img width="24%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/hinge_module_03.JPG"/>
 </div>
 
 Then cut the sticks at the right dimensions (it will depend on your pumpkin) and screw/glue the small segment to the servo. Make a pointy end 
 to the long segment so that it doesn't slide off the top part of the pumpkin when in place. 
 
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/hinge_module_04.JPG"/>
-<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/hack-o-lantern/img/hinge_module_05.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/hinge_module_04.JPG"/>
+<img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/img/hinge_module_05.JPG"/>
 
 
 #### Putting it all together 

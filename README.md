@@ -5,11 +5,11 @@ Instructions and code for the courses developed by wearhacks.
 
 ### Projects
 
-1. [The Hack-o-lantern](https://github.com/wearhacks/courses/blob/master/hack-o-lantern/instructions.md) 
+1. [The Hack-o-lantern](https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/instructions.md) 
 
 ### Guides
 
-1. [Getting started with the Spark Core](https://github.com/wearhacks/courses/blob/master/particle/instructions.md)
+1. [Getting started with the Spark Core](https://github.com/wearhacks/courses/blob/master/guides/particle/instructions.md)
 
 
 ## Contributions
