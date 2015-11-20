@@ -6,6 +6,7 @@ Instructions and code for the courses developed by wearhacks.
 ### Projects
 
 1. [The Hack-o-lantern](https://github.com/wearhacks/courses/blob/master/projects/hack-o-lantern/instructions.md) 
+2. [Myo Marble Balance](projects/myo_marble/instructions.md) 
 
 ### Guides
 
