@@ -1,0 +1,14 @@
+{
+   "Nuance": {
+      "applicationKey" : "<put your string of 128 hex digits here ...>",
+      "applicationId" : "<Look like `NMDPTRIAL_email_domain_com20151224235959`"
+   },
+   "audioDevice": {
+     "record": "hw:1",
+     "playback": ""
+   },
+   "sensorSerial": {
+     "device": "/dev/ttyACM0",
+     "speed": 9600
+   }
+}

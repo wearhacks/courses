@@ -1,0 +1,23 @@
+{
+  "name": "magic-mirror",
+  "homepage": "https://github.com/sebascabot/magic-mirror",
+  "authors": [
+    "Sebastien Cabot <sebascabot@gmail.com>"
+  ],
+  "description": "FrontEnd of the Magic Mirror",
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
