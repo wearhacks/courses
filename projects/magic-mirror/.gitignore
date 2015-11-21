@@ -1,0 +1,4 @@
+node_modules
+source/front-end/bower_components/
+recording.pcm
+synthesis.wav
