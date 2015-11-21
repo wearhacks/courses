@@ -27,7 +27,7 @@
 
 ## Démonstration
 
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/lbKZVD8Y8uU" frameborder="0" allowfullscreen></iframe>
+  [![Utilisation calme du miroir magique par un adulte](http://img.youtube.com/vi/lbKZVD8Y8uU/0.jpg)](http://www.youtube.com/watch?v=lbKZVD8Y8uU)
 
 ## Le matériel
 
