@@ -1,0 +1,26 @@
+{
+  "name": "magic-mirror",
+  "repository" :
+  {
+    "type" : "git",
+    "url" : "https://github.com/sebascabot/magic-mirror.git"
+  },
+  "version": "0.1.0",
+  "main": "bootstrap.js",
+  "scripts": {
+    "start": "node bootstrap"
+  },
+  "author": "La Fine Équipe",
+  "dependencies": {
+    "express": "*",
+    "lodash": "*",
+    "async": "^1.4.2",
+    "body-parser": "^1.14.1",
+    "method-override": "^2.3.5",
+    "request": "^2.64.0",
+    "serialport": "^1.7.4",
+    "socket.io": "^1.3.7",
+    "bower": "*"
+  },
+  "license": "MIT"
+}
