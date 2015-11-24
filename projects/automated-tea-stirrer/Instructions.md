@@ -1,4 +1,4 @@
-# Hardware Guild workshop : introduction to arduino
+# The automated tea stirrer
 
 This document provides instructions and explanations for completing the first workshop.
 The goal is to make an **automated tea stirrer** using an **Arduino Uno** as microcontroller. 
