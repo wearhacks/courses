@@ -7,7 +7,7 @@ uint8_t moo = 1;
 
 void setup() {
   pinMode(LED_PIN, OUTPUT);  
-  digitalWrite(LED_PIN, moo);
+  sdigitalWrite(LED_PIN, moo);
   man.setupReceive(RX_PIN, MAN_4800);
   man.beginReceive();
   Serial.begin(9600);

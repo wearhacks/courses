@@ -44,11 +44,11 @@ void loop() {
     man.beginReceive(); //start listening for next message right after you retrieve the message
   }
   
-  if (m<700) {
+  if (m>980) {
     pixels.setPixelColor(0, pixels.Color(250,0,0));
     pixels.show();
     //Serial.println("A");
-  } else if (m>1000) {
+  } else if (m<930) {
       pixels.setPixelColor(0, pixels.Color(0,250,0));
       pixels.show();
      // Serial.println("B");

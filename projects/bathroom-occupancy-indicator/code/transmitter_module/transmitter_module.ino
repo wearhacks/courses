@@ -3,7 +3,7 @@
 #include <avr/interrupt.h>
 
 #define TX_PIN 1  //pin where your transmitter is connected
-#define LED_PIN 4 //pin for blinking LED
+#define LED_PIN 2 //pin for blinking LED
 
 uint8_t moo = 1; //last led status
 uint16_t transmit_data = 0;
@@ -20,8 +20,8 @@ uint16_t transmit_data = 0;
 volatile boolean f_wdt = 1;
 
 void setup() {
-  pinMode(LED_PIN, OUTPUT);
-  digitalWrite(LED_PIN, moo);
+  //pinMode(LED_PIN, OUTPUT);
+  //digitalWrite(LED_PIN, moo);
   man.setupTransmit(TX_PIN, MAN_4800);
   
       setup_watchdog(8); // approximately 0.5 seconds sleep
@@ -31,11 +31,11 @@ void loop() {
   static int counter =0;
     if (f_wdt==1) {  // wait for t
     f_wdt=0;       // reset flag
-    while(counter<10) {
+    while(counter<20) {
         transmit_data = analogRead(3);
       man.transmit(transmit_data);
-      moo = ++moo % 2;
-      digitalWrite(LED_PIN, moo);
+      //moo = ++moo % 2;
+      //digitalWrite(LED_PIN, moo);
       counter++;
     }
     counter =0;
