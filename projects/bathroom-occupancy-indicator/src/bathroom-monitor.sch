@@ -6186,7 +6186,7 @@ These are standard reverse protection diodes and small signal diodes. SMA packag
 <part name="U$8" library="microbuilder" deviceset="VBAT" device=""/>
 <part name="GND8" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="J1" library="con-jack" deviceset="JACK-PLUG" device="1" value="12V"/>
-<part name="D1" library="SparkFun-DiscreteSemi" deviceset="DIODE" device="KIT2"/>
+<part name="D1" library="SparkFun-DiscreteSemi" deviceset="DIODE" device="KIT2" value="1N4001"/>
 </parts>
 <sheets>
 <sheet>
@@ -6249,9 +6249,9 @@ regulator</text>
 <instance part="U$8" gate="G$1" x="149.86" y="35.56"/>
 <instance part="GND8" gate="1" x="149.86" y="10.16"/>
 <instance part="J1" gate="G$1" x="22.86" y="109.22"/>
-<instance part="D1" gate="G$1" x="104.14" y="17.78" smashed="yes">
-<attribute name="NAME" x="102.87" y="20.2946" size="1.778" layer="95"/>
-<attribute name="VALUE" x="106.68" y="15.4686" size="1.778" layer="96"/>
+<instance part="D1" gate="G$1" x="104.14" y="17.78" smashed="yes" rot="R180">
+<attribute name="NAME" x="105.41" y="15.2654" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="110.236" y="21.6154" size="1.778" layer="96" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -6364,7 +6364,7 @@ regulator</text>
 </segment>
 <segment>
 <pinref part="SUPPLY3" gate="G$1" pin="VCC"/>
-<pinref part="D1" gate="G$1" pin="C"/>
+<pinref part="D1" gate="G$1" pin="A"/>
 <wire x1="109.22" y1="17.78" x2="106.68" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -6446,13 +6446,6 @@ regulator</text>
 <wire x1="223.52" y1="101.6" x2="226.06" y2="101.6" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$6" class="0">
-<segment>
-<pinref part="D1" gate="G$1" pin="A"/>
-<pinref part="L1" gate="G$1" pin="VDD"/>
-<wire x1="101.6" y1="17.78" x2="96.52" y2="17.78" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="PB2" class="0">
 <segment>
 <pinref part="U1" gate="A" pin="PB2(SCK/A1)"/>
@@ -6472,6 +6465,13 @@ regulator</text>
 <pinref part="R3" gate="G$1" pin="1"/>
 <pinref part="LED1" gate="G$1" pin="A"/>
 <wire x1="185.42" y1="55.88" x2="180.34" y2="55.88" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$6" class="0">
+<segment>
+<pinref part="D1" gate="G$1" pin="C"/>
+<pinref part="L1" gate="G$1" pin="VDD"/>
+<wire x1="101.6" y1="17.78" x2="96.52" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
