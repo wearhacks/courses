@@ -1,14 +1,19 @@
+// Import libraries
 #include <Manchester.h>
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
 
+// Define pins 
 #define TX_PIN 1  //pin where your transmitter is connected
 #define LED_PIN 2 //pin for blinking LED
+#define SENSOR_PIN 3 // pin for IR sensor
 
+// Define global variables
 uint8_t moo = 1; //last led status
 uint16_t transmit_data = 0;
+volatile boolean f_wdt = 1;
 
-// Routines to set and claer bits (used in the sleep code)
+// Routines to set and clear bits (used in the sleep code)
 #ifndef cbi
   #define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
 #endif
@@ -16,32 +21,32 @@ uint16_t transmit_data = 0;
   #define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
 #endif
 
-// Variables for the Sleep/power down modes:
-volatile boolean f_wdt = 1;
-
 void setup() {
-  //pinMode(LED_PIN, OUTPUT);
-  //digitalWrite(LED_PIN, moo);
-  man.setupTransmit(TX_PIN, MAN_4800);
+	pinMode(SENSOR_PIN, INPUT); // Set-up sensor analog pin
+	
+	man.setupTransmit(TX_PIN, MAN_4800); // Set-up transmissions with baud rate = 4800bps
   
-      setup_watchdog(8); // approximately 0.5 seconds sleep
+	setup_watchdog(8); // set-up timer at approximately 5 secs sleep
 }
 
 void loop() {
-  static int counter =0;
+	static int counter =0; // counter used to send message multiple times before sleep
+	
+	// if the sleep sequence is over, execute message sequence
     if (f_wdt==1) {  // wait for t
-    f_wdt=0;       // reset flag
-    while(counter<20) {
-        transmit_data = analogRead(3);
-      man.transmit(transmit_data);
-      //moo = ++moo % 2;
-      //digitalWrite(LED_PIN, moo);
-      counter++;
-    }
-    counter =0;
+		f_wdt=0;       // reset flag
+	
+		// send message 20 times before going to sleep
+		while(counter<20) {
+			transmit_data = analogRead(SENSOR_PIN);
+			man.transmit(transmit_data);
 
-      digitalWrite(LED_PIN, LOW);
-        system_sleep();  // Send the unit to sleep
+			counter++;
+		}
+	
+		counter = 0; // reset counter for next loop execution
+
+		system_sleep();  // Send the unit to sleep
     }
 }
 
