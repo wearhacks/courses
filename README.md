@@ -9,6 +9,7 @@ Instructions and code for the courses developed by wearhacks.
 2. [Myo Marble Balance](projects/myo_marble/instructions.md) 
 3. [Magic mirror](https://github.com/wearhacks/courses/blob/master/projects/magic-mirror/instructions.md) (*in french*)
 4. [Automated tea stirrer](https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/instructions.md)
+5. [Bathroom occupancy monitor](https://github.com/wearhacks/courses/edit/master/projects/bathroom-occupancy-indicator/instructions.md)
 
 ### Guides
 
