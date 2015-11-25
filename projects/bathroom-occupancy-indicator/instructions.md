@@ -210,7 +210,7 @@ How does it translates in terms of readings from the analog pin of the emitter ?
 The picture on the right allows you to actually see the beam of IR light being reflected by the knob so it's easy to pick up the concept. 
 
 
-### Emitter device  
+### Receiver device  
 As I mentionned in the last part, we have one thing to do before permanently soldering the RF receiver. Connect it to the Uno and upload the [receiver test code](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/receiver_module_test) in order to print the values received from the emitter to the Serial console. 
 
 In the [receiver final script](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/receiver_module), you need to set two values: **closedReflectivity** and **openReflectivity**. They correspond to the value returned by the IR sensor when the door is either locked or unlocked. These values are conditionned by several factors (the normal reflectivity of you knob, the distance between the sensor and the knob etc.) so you need to test your specific set-up and set the values accordingly. 
