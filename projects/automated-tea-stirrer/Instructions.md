@@ -24,7 +24,7 @@ can be used instead of the perfboard.
 * 1x green 5mm LED
 * 1x red 5mm LED
 
-![BOM](https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/src/img/00_components.JPG "Components needed")
+![BOM](https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/00_components.JPG "Components needed")
 
 **Features** : the servo is used to lift the tea bag in or out of the cup. A potentiometer allows to set the time of stirring. 
 The pushbutton controls the beggining of the stirring cycle .When it stops the buzzer emits a beep. Each led is protected by a resistor. 
@@ -33,8 +33,8 @@ The whole circuit is powered by a 9v battery through the Vin pin (a power jack c
 ###Circuit : breadboard 
 Start by testing your circuit on a breadboard in order to be sure that every component is working as it should be. 
 
-<img width="50%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/circuit_fritzing_bb.jpg"/>
-<img width="50%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/circuit_schematic.png"/>
+<img width="49.5%" height="50%" src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/circuit_fritzing_bb.jpg"/>
+<img width="49.5%" height="50%" src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/circuit_schematic.png"/>
 
 Here's how the circuit works : 
 * **Potentiometer**(RV1) : depending on the position of the axe, 0->5v is fed to the analog pin A5 of the Arduino. 
@@ -49,27 +49,27 @@ When the circuit is opened (button unpressed), D6 is low impedance and current f
 Inversely when the circuit is closed (button pressed), the current flows directly to the ground and d6 reads LOW. 
 
 ###Assemble frame
-<img width="33%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/src/img/02_frame_parts.JPG"/>
-<img width="33%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/src/img/frame_assembled.png"/>
-<img width="33%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/frame_plans.png"/>
+<img width="32%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/02_frame_parts.JPG"/>
+<img width="32%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/frame_assembled.png"/>
+<img width="32%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/frame_plans.png"/>
 
 Assemble the frame and screw in the different components (buttons, servo and leds).
 
-<img width="50%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/src/img/031_frame_add_components.JPG"/>
-<img width="50%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/src/img/032_frame_add_components.JPG"/>
+<img width="49.5%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/031_frame_add_components.JPG"/>
+<img width="49.5%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/032_frame_add_components.JPG"/>
 
 ###Solder circuit
 Next solder the different components. 
 
-![Soldering](https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/src/img/040_solder_components.JPG "Solder components")
+![Soldering](https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/040_solder_components.JPG "Solder components")
 
 You'll probably want to start by soldering the passive elements and the wires on
 the perfboard. Then solder the wires to the buttons, the led and the potentiometer already embedded to the frame. 
 
 
-<img width="33%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/src/img/051_plug_arduino.JPG"/>
-<img width="33%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/src/img/041_solder_components.JPG"/>
-<img width="33%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/src/img/042_solder_components.JPG"/>
+<img width="32%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/051_plug_arduino.JPG"/>
+<img width="32%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/041_solder_components.JPG"/>
+<img width="32%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/042_solder_components.JPG"/>
 
 ###Upload code
 Finally you just need to plug in the Arduino and the servo. Connect the Arduino to a computer with the USB cable and upload the code found in the folder *arduino_code*.
@@ -83,10 +83,11 @@ potentiometer. Durring the stirring process, the green LED will be turned on as 
 the buzzer is triggered to play two identical notes and the servo comes back to a high position. Control comes back to the main loop. 
 
 
-<img width="50%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/src/img/052_upload_code.JPG"/>
-<img width="50%" height="50%" align="right" src="https://github.com/wearhacks/courses/tree/master/projects/automated-tea-stirrer/src/img/06_final_project.JPG"/>
+<img width="49.5%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/052_upload_code.JPG"/>
+<img width="49.5%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/06_final_project.JPG"/>
 Try and play with the potentiometer and the Serial console in order to match the angles with the corresponding time. Your project is ready, congratulations !
 
 
 ###Video of the completed project :
 [![Watch](http://img.youtube.com/vi/GEQ1YadsMo0/0.jpg)](http://www.youtube.com/watch?v=GEQ1YadsMo0)
+ 	
