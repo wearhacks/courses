@@ -14,7 +14,7 @@ Instructions and code for the courses developed by wearhacks.
 ### Guides
 
 1. [Getting started with the Spark Core](https://github.com/wearhacks/courses/blob/master/guides/particle/instructions.md)
-2. [Flashing the ATtiny85 with an Arduino Uno](https://github.com/wearhacks/courses/tree/master/guides/ATtiny/instructions.md)
+2. [Flashing the ATtiny85 with an Arduino Uno](https://github.com/wearhacks/courses/blob/master/guides/ATtiny/Instructions.md)
 
 
 ## Contributions
