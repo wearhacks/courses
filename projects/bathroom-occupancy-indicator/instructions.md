@@ -53,14 +53,14 @@ The first thing we need to do is to test our components individually in order to
 ### Initial set-up 
 Since you are following this tutorial you are probably already used to uploading code to an Arduino. But this time it is a little different since we need to flash the ATtiny chip itself. You obviously can't use a usb cable directly like we do with the Uno. 
 
-Follow [this guide]() in order to **flash your device** and test it with the famous blink sketch. 
+Follow [this guide](https://github.com/wearhacks/courses/tree/master/guides/ATtiny/instructions.md) in order to **flash your device** and test it with the famous blink sketch. 
 
 Now that you followed the guide, you should know about cores packages. This is where things get messy. In order to use one of the libraries that we require, we need to install a specific core package on a (very) specific version of Arduino. And to add to the complexity, the ISP sketch that we upload to the Arduino the serves as a bridge between the computer and the ATtiny will need to come from yet another version of Arduino. 
 
 So let's get to it. You shouldn't be lost if you follow the following steps: 
 
 1. [Download the Arduino IDE](https://www.arduino.cc/en/Main/OldSoftwareReleases) version **1.0.0** and **1.6.0**. Be careful here, not the 1.0.1, and not the 1.6.2. **1.0.0** and **1.6.0**. Less hair pulling will ensue if you make no mistake here. 
-2. [Download the core package](https://code.google.com/p/arduino-tiny/) for Arduino 1.0 and set-up following the procedure explained in the [guide]().
+2. [Download the core package](https://code.google.com/p/arduino-tiny/) for Arduino 1.0 and set-up following the procedure explained in the [guide](https://github.com/wearhacks/courses/tree/master/guides/ATtiny/instructions.md).
 3. [Download](https://github.com/mchr3k/arduino-libs-manchester) and install the [Manchester library](http://mchr3k.github.io/arduino-libs-manchester/) for the Arduino IDE **1.0.0**. [This page](https://www.arduino.cc/en/Guide/Libraries#toc5) from the Arduino website will help you with that if need be.  
 4. [Download](https://github.com/adafruit/Adafruit_NeoPixel) and install the Neopixel library for the Arduino IDE **1.0.0**. 
 5. Upload the **ArduinoISP** example sketch from the Arduino IDE **1.6.0** to the Arduino used as **bridge**. 
@@ -128,7 +128,7 @@ We will begin by ensuring that the Neopixel's library works well with the ATtiny
 
 Assemble the circuit on a breadboard. 
 
-[Upload the corresponding code](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/ATtiny_neopixel) using the method described in the [guide](). Your Neopixel should start a nice rainbow-like animation. 
+[Upload the corresponding code](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/ATtiny_neopixel) using the method described in the [guide](https://github.com/wearhacks/courses/tree/master/guides/ATtiny/instructions.md). Your Neopixel should start a nice rainbow-like animation. 
 
 #### Emitter circuit 
 <img width="49.5%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/RF-Sensor-ATtiny_bb.png"/>
