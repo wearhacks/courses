@@ -3,10 +3,16 @@
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
 
+// #define DEBUG // uncomment for debug purposes 
+
 // Define pins 
 #define TX_PIN 1  //pin where your transmitter is connected
-#define LED_PIN 2 //pin for blinking LED
 #define SENSOR_PIN 3 // pin for IR sensor
+#define SENSOR_POWER_PIN 4
+#ifdef DEBUG
+  #define LED_PIN 2 //pin for blinking LED
+#endif
+  
 
 // Define global variables
 uint8_t moo = 1; //last led status
@@ -23,31 +29,48 @@ volatile boolean f_wdt = 1;
 
 void setup() {
 	pinMode(SENSOR_PIN, INPUT); // Set-up sensor analog pin
+        pinMode(SENSOR_POWER_PIN, OUTPUT);
+        digitalWrite(SENSOR_POWER_PIN, HIGH); // Set-up sensor control pin to off
+        
+        #ifdef DEBUG
+          digitalWrite(LED_PIN, HIGH);
+          delay(500);
+        #endif
 	
 	man.setupTransmit(TX_PIN, MAN_4800); // Set-up transmissions with baud rate = 4800bps
   
-	setup_watchdog(8); // set-up timer at approximately 5 secs sleep
+	setup_watchdog(9); // set-up timer at approximately 10 secs sleep
 }
 
 void loop() {
 	static int counter =0; // counter used to send message multiple times before sleep
 	
 	// if the sleep sequence is over, execute message sequence
-    if (f_wdt==1) {  // wait for t
-		f_wdt=0;       // reset flag
-	
-		// send message 20 times before going to sleep
-		while(counter<20) {
-			transmit_data = analogRead(SENSOR_PIN);
-			man.transmit(transmit_data);
-
-			counter++;
-		}
-	
-		counter = 0; // reset counter for next loop execution
-
-		system_sleep();  // Send the unit to sleep
-    }
+        if (f_wdt==1) {  // wait for t
+    		f_wdt=0;       // reset flag
+    	
+                // enable power for the sensor
+                digitalWrite(SENSOR_POWER_PIN, LOW);
+    		// send message 20 times before going to sleep
+    		while(counter<25) {
+    			transmit_data = analogRead(SENSOR_PIN);
+    			man.transmit(transmit_data);
+    
+                  	#ifdef DEBUG
+                          // Trigger status LED 
+                      	  moo = ++moo % 2;
+                      	  digitalWrite(LED_PIN, moo);
+                        #endif
+                        
+    			counter++;
+    		}
+    	        // disable power for the sensor
+                digitalWrite(SENSOR_POWER_PIN, HIGH);
+                
+    		counter = 0; // reset counter for next loop execution
+    
+    		system_sleep();  // Send the unit to sleep
+        }
 }
 
 // set system into the sleep state 

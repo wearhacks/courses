@@ -22,7 +22,7 @@ void setup() {
 void loop() {
 	// If a message has been decoded, proceed with processing it
 	if (man.receiveComplete()) {
-		Serial.println("Message received: ")
+		Serial.println("Message received: ");
 		
 		uint16_t m = man.getMessage(); // retrieve message
 	
