@@ -50,7 +50,7 @@ Inversely when the circuit is closed (button pressed), the current flows directl
 
 ###Assemble frame
 <img width="32%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/02_frame_parts.JPG"/>
-<img width="32%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/src/img/frame_assembled.png"/>
+<img width="32%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/frame_assembled.png"/>
 <img width="32%" height="50%"  src="https://raw.githubusercontent.com/wearhacks/courses/master/projects/automated-tea-stirrer/frame_plans.png"/>
 
 Assemble the frame and screw in the different components (buttons, servo and leds).
