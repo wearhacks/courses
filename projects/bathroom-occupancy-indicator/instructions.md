@@ -1,11 +1,11 @@
 # The bathroom occupancy indicator
-This project was born from a very common problem: our office's floor is equiped with one bathroom that can't be seen from every desk. Ensues uncessary back and forth when someone walks to the bathroom only to find it occupied. 
+This project was born from a very common problem: our office's floor is equipped with one bathroom that can't be seen from every desk. Ensues unnecessary back and forth when someone walks to the bathroom only to find it occupied. 
 
 The solution ? A simple bathroom monitoring system composed of two devices: 
-- An **emitter** placed on the inside of the door of the bathroom to monitor. An **infrared sensor** is directed toward the deadbold knob. A piece of black tape is applied on the knob. The idea is the following: when the door is unlocked, the knob's metallic surface is facing the sensor and reflecting a fair amount of IR light. When the door is locked, the taped part of the knob is now facing the sensor. Since the tape is black, the amount of IR light reflected decreases: we know that the door is locked. We use a **radio emitter** module to send the value read from the sensor to the receiver. A small Atmel microcontroller (the **ATtiny85**) acts as the brain of the system. The device runs on 4 AAA batteries and is put to sleep 5 seconds every time a reading is sent in order to save power. 
+- An **emitter** placed on the inside of the door of the bathroom to monitor. An **infrared sensor** is directed toward the lock's knob. A piece of black tape is applied on the knob. The idea is the following: when the door is unlocked, the knob's metallic surface is facing the sensor and reflecting a fair amount of IR light. When the door is locked, the taped part of the knob is now facing the sensor. Since the tape is black, the amount of IR light reflected decreases: we know that the door is locked. We use a **radio emitter** module to send the value read from the sensor to the receiver. A small Atmel microcontroller (the **ATtiny85**) acts as the brain of the system. The device runs on 4 AAA batteries and is put to sleep 5 seconds every time a reading is sent in order to save power. 
 - The **receiver** is used to display the status of occupancy of the bathroom remotely. It is built around the same microcontroller as the emitter. A RF receiver picks up the readings from the emitter. Depending on the value received, we light up an RGB LED in green or red. This device runs on a wall wart since the LED is constantly turned on. 
 
-Both devices are equiped of an ON/OFF switch. 
+Both devices are equipped of an ON/OFF switch. 
 
 <img width="49.5%" height="50%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/emitter_installed_01.JPG"/>
 <img width="49.5%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/receptor_result_01.JPG"/>
@@ -88,7 +88,7 @@ The circuit is simple: we simply provide power to both modules and use a 330μF 
 #### Adding the IR sensor
 <img width="100%" height="100%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/RF-sensor-test_bb.png"/>
 
-The IR sensor is composed of two parts: an IR LED and a phototransistor reactic to a specific wavelength. The LED is wired as any other: in serie with a current limitting resistor. 
+The IR sensor is composed of two parts: an IR LED and a phototransistor reactive to a specific wavelength. The LED is wired as any other: in serie with a current limiting resistor. 
 
 We use a **pull-up design** to connect the sensor. Remember that the sensor is simply a phototransistor: the IR light it is subjected to creates a small current to the gate, provoking a larger current to flow between the collector and the drain. It means that when no light is applied to the sensor, it basically acts as a resistor of near infinite resistance. 
 
@@ -114,7 +114,7 @@ Let *L* be the length of the wire, *f* the frequency of the radio signal we are 
 
 *L* = 0.2378m = 23.78cm
 
-The wire used as antenna should be approximatly 24cm long. Make your tests in order to see what works out best for you: type of wire, coiled or not etc. 
+The wire used as antenna should be approximately 24cm long. Make your tests in order to see what works out best for you: type of wire, coiled or not etc. 
 
 
 ### Switching to the ATtiny85
@@ -180,7 +180,7 @@ We can now make it a bit more permanent. Heat up your soldering iron and gather 
 
 We start with the emitter because we'll have to calibrate some values in the receiver code once the emitter will be placed on the door. For the calibration we will print the values from the receiver which is why it is a good idea to keep this part of the project on a breadboard for now so that you can easily reconnect it to an Arduino. 
 
-The way you wish to organize your soldering process is up to you. I personally started by soldering the "free" elements (the ON/OFF switch, the IR sensor and the battery holder) to a small piece of PCB along with their connection wires. Then I moved on to the main PCB, starting by the MCU socket and the RF emitter link. I soldered the passive components, the wires and the antonna. Finally I connected the switch and the sensor to the main PCB. 
+The way you wish to organize your soldering process is up to you. I personally started by soldering the "free" elements (the ON/OFF switch, the IR sensor and the battery holder) to a small piece of PCB along with their connection wires. Then I moved on to the main PCB, starting by the MCU socket and the RF emitter link. I soldered the passive components, the wires and the antenna. Finally I connected the switch and the sensor to the main PCB. 
 
 <img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/emitter_soldering_01.JPG"/>
 <img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/emitter_soldering_03.JPG"/>
@@ -200,7 +200,7 @@ Finally coil the antenna and find some room for it. If you are experiencing diff
 
 Our first device is ready to be deployed. Let's review one more time how it will detect if the door is locked or unlocked. 
 
-The device is placed so that the IR sensor faces the lock's knob. A piece of black tape is applied to the knob so that when it is locked, the tape faces the sensor changing the reflectivity of the knob. Inversly when the door is unlocked, the untaped part of the knob faces the sensor. 
+The device is placed so that the IR sensor faces the lock's knob. A piece of black tape is applied to the knob so that when it is locked, the tape faces the sensor changing the reflectivity of the knob. Inversely when the door is unlocked, the untaped part of the knob faces the sensor. 
 
 How does it translates in terms of readings from the analog pin of the emitter ? When the door is locked, the sensor faces a black surface thus the phototransistor receives next to no light. Its resistance is high: the analog reading is high too (close to 1023). When the door is unlocked, the untaped part of the knob reflects a certain amount of light from the IR LED of the sensor back to it. The phototransistor's resistance is lowered: the value read from the analog pin drops. 
 
@@ -211,11 +211,11 @@ The picture on the right allows you to actually see the beam of IR light being r
 
 
 ### Receiver device  
-As I mentionned in the last part, we have one thing to do before permanently soldering the RF receiver. Connect it to the Uno and upload the [receiver test code](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/receiver_module_test) in order to print the values received from the emitter to the Serial console. 
+As I mentioned in the last part, we have one thing to do before permanently soldering the RF receiver. Connect it to the Uno and upload the [receiver test code](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/receiver_module_test) in order to print the values received from the emitter to the Serial console. 
 
-In the [receiver final script](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/receiver_module), you need to set two values: **closedReflectivity** and **openReflectivity**. They correspond to the value returned by the IR sensor when the door is either locked or unlocked. These values are conditionned by several factors (the normal reflectivity of you knob, the distance between the sensor and the knob etc.) so you need to test your specific set-up and set the values accordingly. 
+In the [receiver final script](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/receiver_module), you need to set two values: **closedReflectivity** and **openReflectivity**. They correspond to the value returned by the IR sensor when the door is either locked or unlocked. These values are conditioned by several factors (the normal reflectivity of you knob, the distance between the sensor and the knob etc.) so you need to test your specific set-up and set the values accordingly. 
 
-When you are satisfied with your adjustements, you can move on to the next part. 
+When you are satisfied with your adjustments, you can move on to the next part. 
 
 #### Soldering the circuit 
 Nothing new here. We solder the "free" components as well as the main perfboard. One difference though: don't solder the external components to the main PCB just yet as we need to do some additional work on the enclosure. 
@@ -235,7 +235,7 @@ The idea is the following:
 - use a ceramic plate or a relatively default-free surface, spray it with oil, 
 - place your enclosure, inside facing you,
 - as quickly and smoothly as possible, apply a first layer of hot glue on the light diffuser hole made in the enclosure (you want to pour the glue quickly because it will give a more homogeneous result),
-- after around 1/2 minute(s), place the neopixel in the center and apply a soft pression so that it sticks to the glue,
+- after around 1/2 minute(s), place the neopixel in the center and apply a soft pressure so that it sticks to the glue,
 - wait 2 more minutes and add a little dot of glue on the back of the neopixel (this is so that the PCB traces are properly isolated since things will get pretty stacked in there later on,
 - wait again for a few minutes and carefully separate the enclosure from the plate (if the glue is still a bit soft, continue waiting until it is really solid). 
 
@@ -256,7 +256,7 @@ Then solder the connections to the main PCB and coil the wire - or not: once aga
 <img width="49.5%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/receptor_assembly_01.JPG"/>
 <img width="49.5%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/receptor_assembly_02.JPG"/>
 
-Et voilà! You're all set, time to put your devices to good use and to avoid your co-workers uncessary bathroom trips!
+Et voilà! You're all set, time to put your devices to good use and to avoid your co-workers unnecessary bathroom trips!
 
 <img width="49.5%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/receptor_result_01.JPG"/>
 <img width="49.5%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/receptor_result_02.JPG"/>
