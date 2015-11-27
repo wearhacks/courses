@@ -10,7 +10,7 @@ Instructions and code for the courses developed by wearhacks.
 3. [Magic mirror](https://github.com/wearhacks/courses/blob/master/projects/magic-mirror/instructions.md) (*in french*)
 4. [Automated tea stirrer](https://github.com/wearhacks/courses/blob/master/projects/automated-tea-stirrer/Instructions.md)
 5. [Bathroom occupancy monitor](https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/instructions.md)
-6. [asl-to-speech](https://github.com/xTEddie/courses/blob/asl/projects/asl-to-speech/instructions.md)
+6. [Asl-to-Speech](https://github.com/xTEddie/courses/blob/asl/projects/asl-to-speech/instructions.md)
 
 ### Guides
 
