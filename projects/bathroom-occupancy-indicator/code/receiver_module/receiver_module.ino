@@ -16,8 +16,8 @@ Adafruit_NeoPixel pixel = Adafruit_NeoPixel(1, LED_PIN, NEO_GRB + NEO_KHZ800);
 // Parameters used to detect a locked/unlocked door
 // Make your own tests and set your own values since it will depend on
 // the reflectivity of your knob/the distance of the sensor from it etc. 
-int closedReflectivity = 945;
-int openReflectivity = 930;
+int closedReflectivity = 930;
+int openReflectivity = 900;
 uint16_t m = 0; // door open on start
 
 void setup() {

@@ -69,6 +69,7 @@ GND  | GND
 The clock rate of the ATtiny out of the factory is 1Mhz but the internal oscillator can go up to 8Mhz (you'll need to add a crystal for more). 
 
 - Select the **ATtiny85 board** with a frequency of **8Mhz** on the internal oscillator in the **board** tab.
+- Select **Arduino as ISP** in **Tools**->**Programmer**.
 - In the same **Tools** menu, click on **Burn bootloader**.
 
 There you go. Your chip is now running 8 times faster!

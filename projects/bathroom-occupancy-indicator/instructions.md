@@ -1,4 +1,4 @@
-# The bathroom occupancy indicator
+﻿# The bathroom occupancy indicator
 This project was born from a very common problem: our office's floor is equipped with one bathroom that can't be seen from every desk. Ensues unnecessary back and forth when someone walks to the bathroom only to find it occupied. 
 
 The solution ? A simple bathroom monitoring system composed of two devices: 
@@ -131,13 +131,21 @@ Assemble the circuit on a breadboard.
 [Upload the corresponding code](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/ATtiny_neopixel) using the method described in the [guide](https://github.com/wearhacks/courses/blob/master/guides/ATtiny/Instructions.md). Your Neopixel should start a nice rainbow-like animation. 
 
 #### Emitter circuit 
-<img width="49.5%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/RF-Sensor-ATtiny_bb.png"/>
-<img width="49.5%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/receptor_test_01.JPG"/>
-We start by testing the emitter so that we can still use an Arduino on the receiver side and print the incoming messages for debugging purposes. 
+<img width="32%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/RF-Sensor-ATtiny_bb_01.png"/>
+<img width="32%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/RF-Sensor-ATtiny_bb_02.png"/>
+<img width="32%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/receptor_test_01.JPG"/>
+
+We start by testing the emitter so that we can still use an Arduino on the receiver side and print the incoming messages for debugging purposes. This corresponds to the first Fritzing diagram. 
 
 You can use the same code as [before](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/transmitter_module_test_02) as it includes pin numbers for the ATtiny. As before, you should see the value read from the sensor on the Serial console of the receiver. 
 
-When you are done with your tests, [upload the final version](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/transmitter_module) of the code for the emitter. What it does it implement a sleeping mechanism so that we can save as much power as possible on the device since it runs on batteries. After each active cycle, the device is put to sleep for about 5 seconds. We don't use the status LED anymore again for energy conservation purposes. When the device wakes up for an active cycle, it takes a reading from the IR sensor and sends it 20 times. We do that because depending on the conditions the RF link can be very weak so we want to ensure that the message is received before going back to sleep. 
+When you are done with your tests, move on the the final version of the emitter circuit. 
+
+The circuit is a little different: instead of connecting the cathodes of the IR Sensor directly to the ground, we connect them to a pin of the ATtiny. This way we can control the power going to the sensor: when the ATtiny pin is set to **HIGH**, no current flows since the sensor is connected to two positive traces. When the pin is set to **LOW**, it acts as a sink and current can flow from the sensor to the ground. 
+
+[Upload the final version](https://github.com/wearhacks/courses/tree/master/projects/bathroom-occupancy-indicator/code/transmitter_module) of the code for the emitter. 
+
+What it does it implement a sleeping mechanism so that we can save as much power as possible on the device since it runs on batteries. After each active cycle, the device is put to sleep for about 10 seconds. We don’t use the status LED anymore again for energy conservation purposes. When the device wakes up for an active cycle, it switches on the power for the IR sensor, takes a reading and sends it 25 times. We do that because depending on the conditions the RF link can be very weak so we want to ensure that the message is received before going back to sleep. The power is then disabled by setting the sensor sink pin to HIGH and the devices goes to sleep for about 10 seconds. 
 
 #### Receiver circuit 
 <img width="49.5%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/RF-Sensor-Neopixel-ATtiny_bb.png"/>
@@ -183,7 +191,7 @@ We start with the emitter because we'll have to calibrate some values in the rec
 The way you wish to organize your soldering process is up to you. I personally started by soldering the "free" elements (the ON/OFF switch, the IR sensor and the battery holder) to a small piece of PCB along with their connection wires. Then I moved on to the main PCB, starting by the MCU socket and the RF emitter link. I soldered the passive components, the wires and the antenna. Finally I connected the switch and the sensor to the main PCB. 
 
 <img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/emitter_soldering_01.JPG"/>
-<img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/emitter_soldering_03.JPG"/>
+<img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/masterFprojects/bathroom-occupancy-indicator/img/emitter_soldering_03.JPG"/>
 <img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/emitter_soldering_04.JPG"/>
 <img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/emitter_soldering_05.JPG"/>
 
