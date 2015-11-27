@@ -132,8 +132,9 @@ Assemble the circuit on a breadboard.
 
 #### Emitter circuit 
 <img width="32%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/RF-Sensor-ATtiny_bb_01.png"/>
-<img width="32%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/RF-Sensor-ATtiny_bb_02.png"/>
 <img width="32%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/receptor_test_01.JPG"/>
+<img width="32%" height="50%" src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/RF-Sensor-ATtiny_bb_02.png"/>
+
 
 We start by testing the emitter so that we can still use an Arduino on the receiver side and print the incoming messages for debugging purposes. This corresponds to the first Fritzing diagram. 
 
@@ -191,7 +192,7 @@ We start with the emitter because we'll have to calibrate some values in the rec
 The way you wish to organize your soldering process is up to you. I personally started by soldering the "free" elements (the ON/OFF switch, the IR sensor and the battery holder) to a small piece of PCB along with their connection wires. Then I moved on to the main PCB, starting by the MCU socket and the RF emitter link. I soldered the passive components, the wires and the antenna. Finally I connected the switch and the sensor to the main PCB. 
 
 <img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/emitter_soldering_01.JPG"/>
-<img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/masterFprojects/bathroom-occupancy-indicator/img/emitter_soldering_03.JPG"/>
+<img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/emitter_soldering_03.JPG"/>
 <img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/emitter_soldering_04.JPG"/>
 <img width="24.5%" height="25%"  src="https://github.com/wearhacks/courses/blob/master/projects/bathroom-occupancy-indicator/img/emitter_soldering_05.JPG"/>
 
