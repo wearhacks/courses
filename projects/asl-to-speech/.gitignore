@@ -1,0 +1,9 @@
+*.pyc
+lib/x64/*.pyc
+lib/x86/*.pyc
+lib/*.pyc
+src/*.json
+src/*.pcm
+src/*.pcm.wav
+
+
