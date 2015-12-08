@@ -16,11 +16,14 @@ Adafruit_NeoPixel pixel = Adafruit_NeoPixel(1, LED_PIN, NEO_GRB + NEO_KHZ800);
 // Parameters used to detect a locked/unlocked door
 // Make your own tests and set your own values since it will depend on
 // the reflectivity of your knob/the distance of the sensor from it etc. 
-int closedReflectivity = 930;
-int openReflectivity = 900;
+int closedReflectivity = 920;
+int openReflectivity = 905;
 uint16_t m = 0; // door open on start
+long lastUpdate = 0;
+long timeout = 3000000;
 
 void setup() {
+
 	man.setupReceive(RX_PIN, MAN_4800); // Set-up transmissions with baud rate = 4800bps
 	man.beginReceive(); // Start receiving data
   
@@ -29,6 +32,9 @@ void setup() {
 	#endif
 
   pixel.begin(); // This initializes the NeoPixel library.
+      		pixel.setPixelColor(0, pixel.Color(0,0,200)); // orange
+		pixel.show();
+
 }
 
 void loop() {
@@ -37,10 +43,16 @@ void loop() {
 	if (man.receiveComplete()) {
 		m = man.getMessage();
 		man.beginReceive(); //start listening for next message right after you retrieve the message
+                lastUpdate = millis();
+
 	}
   
 	// Light up every in red or green depending on the IR sensor's value
-	if (m>closedReflectivity) {
+        if ((millis()-lastUpdate) > timeout) {
+    		pixel.setPixelColor(0, pixel.Color(204,102,0)); // orange
+		pixel.show();
+        }
+	else if (m>closedReflectivity) {
 		pixel.setPixelColor(0, pixel.Color(250,0,0)); // red
 		pixel.show();
 	} else if (m<openReflectivity) {
